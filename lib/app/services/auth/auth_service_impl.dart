@@ -1,6 +1,5 @@
-import 'package:discount_card_app/app/repositories/auth/auth_repository.dart';
-
 import './auth_service.dart';
+import '../../repositories/auth/auth_repository.dart';
 
 class AuthServiceImpl implements AuthService {
   final AuthRepository _authRepository;

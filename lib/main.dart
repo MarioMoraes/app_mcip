@@ -1,7 +1,8 @@
-import 'package:discount_card_app/app/app_module.dart';
-import 'package:discount_card_app/app/app_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'app/app_module.dart';
+import 'app/app_widget.dart';
 
 void main() async {
   await Future.delayed(const Duration(seconds: 1));

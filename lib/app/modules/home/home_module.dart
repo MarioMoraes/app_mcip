@@ -1,5 +1,6 @@
-import 'package:discount_card_app/app/modules/home/home_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'home_page.dart';
 
 class HomeModule extends Module {
   @override

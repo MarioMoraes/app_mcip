@@ -1,8 +1,9 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:discount_card_app/app/services/auth/auth_service.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../services/auth/auth_service.dart';
 
 part 'login_state.dart';
 

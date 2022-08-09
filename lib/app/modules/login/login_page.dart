@@ -1,10 +1,10 @@
-import 'package:discount_card_app/app/core/ui/theme_extension.dart';
-import 'package:discount_card_app/app/core/widgets/custom_text_form_field.dart';
-import 'package:discount_card_app/app/modules/login/controller/login_controller.dart';
+import 'package:app_mcip/app/core/ui/theme_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../core/widgets/button_with_loader.dart';
+import '../../core/widgets/custom_text_form_field.dart';
+import 'controller/login_controller.dart';
 
 class LoginPage extends StatefulWidget {
   final LoginController loginController;

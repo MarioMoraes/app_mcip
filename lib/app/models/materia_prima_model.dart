@@ -6,7 +6,7 @@ class MateriaPrimaModel {
   final String materiaPrima;
   final String custoUnitario;
   final String unidadeId;
-  final DateTime dataUltimaAtualizacao;
+  final String dataUltimaAtualizacao;
 
   MateriaPrimaModel({
     required this.empresaId,
@@ -24,7 +24,7 @@ class MateriaPrimaModel {
       'materiaPrima': materiaPrima,
       'custoUnitario': custoUnitario,
       'unidadeId': unidadeId,
-      'dataUltimaAtualizacao': dataUltimaAtualizacao.millisecondsSinceEpoch,
+      'dataUltimaAtualizacao': dataUltimaAtualizacao,
     };
   }
 
@@ -35,8 +35,7 @@ class MateriaPrimaModel {
       materiaPrima: map['materiaPrima'] ?? '',
       custoUnitario: map['custoUnitario'] ?? '',
       unidadeId: map['unidadeId'] ?? '',
-      dataUltimaAtualizacao:
-          DateTime.fromMillisecondsSinceEpoch(map['dataUltimaAtualizacao']),
+      dataUltimaAtualizacao: map['dataUltimaAtualizacao'] ?? '',
     );
   }
 

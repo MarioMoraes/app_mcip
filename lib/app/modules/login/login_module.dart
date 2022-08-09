@@ -1,6 +1,7 @@
-import 'package:discount_card_app/app/modules/login/controller/login_controller.dart';
-import 'package:discount_card_app/app/modules/login/login_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'controller/login_controller.dart';
+import 'login_page.dart';
 
 class LoginModule extends Module {
   @override

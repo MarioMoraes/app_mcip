@@ -1,6 +1,6 @@
-import 'package:discount_card_app/app/core/ui/app_ui_config.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/ui/app_ui_config.dart';
 import '../../core/widgets/custom_drawer.dart';
 
 class HomePage extends StatelessWidget {

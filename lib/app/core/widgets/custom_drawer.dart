@@ -1,5 +1,7 @@
-import 'package:discount_card_app/app/core/ui/my_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import '../ui/my_icons.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -22,8 +24,7 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(MyIcons.beaker),
             title: const Text("Matérias Primas"),
             onTap: () {
-              Navigator.pop(context);
-              //Navegar para outra página
+              Modular.to.pushNamed('/materia');
             },
           ),
           ListTile(
