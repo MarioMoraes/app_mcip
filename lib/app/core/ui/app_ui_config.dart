@@ -16,7 +16,7 @@ class AppUiConfig {
     900: Color(0xFF000000),
   });
 
-  static String get title => 'Discount Card';
+  static String get title => 'MasterBusiness MCIP';
 
   static var theme = ThemeData(
     fontFamily: 'Lexend',

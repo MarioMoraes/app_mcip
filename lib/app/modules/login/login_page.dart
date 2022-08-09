@@ -2,6 +2,7 @@ import 'package:discount_card_app/app/core/ui/theme_extension.dart';
 import 'package:discount_card_app/app/core/widgets/custom_text_form_field.dart';
 import 'package:discount_card_app/app/modules/login/controller/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../core/widgets/button_with_loader.dart';
 
@@ -152,7 +153,9 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () async {
           final formValid = _formKey.currentState?.validate() ?? false;
 
-          if (formValid) {}
+          if (formValid) {
+            Modular.to.pushReplacementNamed('/home');
+          }
         },
         label: 'LOGIN',
       ),

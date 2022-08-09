@@ -64,4 +64,7 @@ flutter:
         - asset: assets/fonts/LexendDeca-SemiBold.ttf
         - asset: assets/fonts/LexendDeca-Thin.ttf
 
+    - family: MyIcons
+      fonts:
+        - asset: assets/fonts/MyIcons.ttf
   
