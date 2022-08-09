@@ -14,16 +14,14 @@ class MateriaPrimaRepositoryImpl implements MateriaPrimaRepository {
   Future<List<MateriaPrimaModel>> getMateriaPrima(String empresaId) async {
     try {
       final response = await _dio.get(
-          'https://masterbusiness.adm.br/api/materia-prima.php',
-          queryParameters: {'id': empresaId});
+        'https://masterbusiness.adm.br/api/materia-prima.php',
+        queryParameters: {'id': empresaId},
+      );
 
       if (response.statusCode == 200) {
         var json = jsonDecode(response.data);
 
-        final retorno =
-            (json as List).map((e) => MateriaPrimaModel.fromJson(e)).toList();
-
-        return retorno;
+        return (json as List).map((e) => MateriaPrimaModel.fromMap(e)).toList();
       }
     } on Failure catch (e, s) {
       log('Erro Consulta Materias Primas', error: e.message, stackTrace: s);

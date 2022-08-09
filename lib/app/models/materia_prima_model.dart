@@ -30,12 +30,12 @@ class MateriaPrimaModel {
 
   factory MateriaPrimaModel.fromMap(Map<String, dynamic> map) {
     return MateriaPrimaModel(
-      empresaId: map['empresaId'] ?? '',
+      empresaId: map['empresa_id'] ?? '',
       id: map['id'] ?? '',
-      materiaPrima: map['materiaPrima'] ?? '',
-      custoUnitario: map['custoUnitario'] ?? '',
-      unidadeId: map['unidadeId'] ?? '',
-      dataUltimaAtualizacao: map['dataUltimaAtualizacao'] ?? '',
+      materiaPrima: map['materia_prima'] ?? '',
+      custoUnitario: map['custo_unitario'] ?? '',
+      unidadeId: map['unidade_id'] ?? '',
+      dataUltimaAtualizacao: map['data_ultima_atualizacao'] ?? '',
     );
   }
 

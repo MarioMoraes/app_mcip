@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'controller/materia_prima_state.dart';
 
@@ -16,6 +17,8 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
   @override
   void initState() {
     super.initState();
+
+    // Busca Materias Primas
     widget.materiaPrimaController.fetchAll('1');
   }
 
@@ -25,7 +28,26 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
       appBar: AppBar(
         title: const Text('Matéria Prima'),
       ),
-      body: Container(),
+      body: BlocBuilder<MateriaPrimaController, MateriaPrimaState>(
+        bloc: widget.materiaPrimaController,
+        builder: (context, state) {
+          if (state is MateriaPrimaStateLoading) {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          }
+
+          if (state is MateriaPrimaStateLoaded) {
+            return ListView.builder(
+              itemCount: state.listMP.length,
+              itemBuilder: ((context, index) {
+                return ListTile(title: Text(state.listMP[index].materiaPrima));
+              }),
+            );
+          }
+          return const SizedBox.shrink();
+        },
+      ),
     );
   }
 }
