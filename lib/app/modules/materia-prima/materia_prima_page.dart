@@ -1,3 +1,4 @@
+import 'package:app_mcip/app/modules/materia-prima/widgets/card_mp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,7 +42,13 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
             return ListView.builder(
               itemCount: state.listMP.length,
               itemBuilder: ((context, index) {
-                return ListTile(title: Text(state.listMP[index].materiaPrima));
+                final item = state.listMP[index];
+
+                return CardMp(
+                  materiaPrima: item.materiaPrima,
+                  custoUnitario: item.custoUnitario,
+                  dataUltimaAtualizacao: item.dataUltimaAtualizacao,
+                );
               }),
             );
           }

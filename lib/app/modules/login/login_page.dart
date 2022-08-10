@@ -42,7 +42,10 @@ class _LoginPageState extends State<LoginPage> {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [context.primaryColor, Colors.white],
+                  colors: [
+                    context.primaryColor,
+                    context.primaryColorLight.withOpacity(.5)
+                  ],
                   begin: Alignment.bottomRight,
                   end: Alignment.topLeft,
                 ),
@@ -121,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget inputPassword() {
     return CustomTextFormField(
-      hint: 'Password',
+      hint: 'Senha',
       controller: _passwordEC,
       obscureText: true,
     );
@@ -133,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
       child: InkWell(
         onTap: () {},
         child: const Text(
-          'Forgot Password?',
+          'Esqueceu a Senha?',
           style: TextStyle(
             color: Colors.black87,
             fontSize: 14,
