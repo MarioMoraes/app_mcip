@@ -6,6 +6,7 @@ import 'package:app_mcip/app/models/materia_prima_model.dart';
 import 'package:app_mcip/app/modules/materia-prima/detail/controller/materia_prima_detail_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class MateriaPrimaDetailPage extends StatefulWidget {
   final MateriaPrimaDetailController materiaPrimaDetailController;
@@ -122,50 +123,100 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
     );
 
     showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext bc) {
-          return SizedBox(
-            child: Wrap(
-              children: <Widget>[
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SizedBox(
-                          height: 50,
-                          child: CustomTextFormField(
-                            hint: 'Custo Unitário',
-                            controller: controller,
-                          ),
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext bc) {
+        return SizedBox(
+          child: Wrap(
+            children: <Widget>[
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: SizedBox(
+                        height: 50,
+                        child: CustomTextFormField(
+                          hint: 'Custo Unitário',
+                          controller: controller,
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).viewInsets.bottom),
-                        child: ElevatedButton.icon(
-                          onPressed: () {
-                            final formValid =
-                                _formKey.currentState?.validate() ?? false;
-                            if (formValid) {
-                              Navigator.pop(context);
-                            }
-                          },
-                          icon: const Icon(Icons.save),
-                          label: const Text('Salvar Valor'),
-                        ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: ElevatedButton.icon(
+                        onPressed: () async {
+                          final formValid =
+                              _formKey.currentState?.validate() ?? false;
+                          if (formValid) {
+                            _showAlertDialog(context);
+                            Navigator.pop(context);
+                          }
+                        },
+                        icon: const Icon(Icons.save),
+                        label: const Text('Salvar Valor'),
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        });
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  _showAlertDialog(BuildContext buildContext) {
+    Widget cancelaButton = ElevatedButton.icon(
+      style: ElevatedButton.styleFrom(primary: Colors.red.shade600),
+      icon: const Icon(
+        Icons.cancel,
+        color: Colors.white,
+      ),
+      label: const Text(
+        "Não",
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      onPressed: () => Modular.to.pop(buildContext),
+    );
+
+    Widget continuaButton = ElevatedButton.icon(
+      style: ElevatedButton.styleFrom(primary: Colors.green.shade600),
+      icon: const Icon(
+        Icons.check,
+        color: Colors.white,
+      ),
+      label: const Text(
+        "Sim",
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      onPressed: () => Navigator.pop(buildContext),
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: const Text("Editar Matéria Prima"),
+      content: const Text("Deseja Atualizar Custo Unitário?"),
+      actions: [
+        cancelaButton,
+        continuaButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }

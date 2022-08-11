@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                         Align(
                           alignment: Alignment.center,
                           child: Text(
-                            "MasterBusiness @${DateTime.now().year}",
+                            "Master Business @${DateTime.now().year}",
                             style: const TextStyle(
                                 color: Colors.black54,
                                 fontSize: 14,
