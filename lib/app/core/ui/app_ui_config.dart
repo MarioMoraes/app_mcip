@@ -16,7 +16,7 @@ class AppUiConfig {
     900: Color(0xFF000000),
   });
 
-  static String get title => 'MasterBusiness';
+  static String get title => 'Master Business';
 
   static var theme = ThemeData(
     fontFamily: 'Lexend',

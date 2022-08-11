@@ -29,8 +29,12 @@ class AppModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ModuleRoute('/', module: LoginModule()),
-        ModuleRoute('/home', module: HomeModule()),
-        ModuleRoute('/materia', module: MateriaPrimaModule()),
+        ModuleRoute('/',
+            module: LoginModule(), transition: TransitionType.rightToLeft),
+        ModuleRoute('/home',
+            module: HomeModule(), transition: TransitionType.rightToLeft),
+        ModuleRoute('/materia',
+            module: MateriaPrimaModule(),
+            transition: TransitionType.rightToLeft),
       ];
 }

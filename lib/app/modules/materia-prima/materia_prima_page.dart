@@ -28,6 +28,7 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Matéria Prima'),
+        centerTitle: true,
       ),
       body: BlocBuilder<MateriaPrimaController, MateriaPrimaState>(
         bloc: widget.materiaPrimaController,
@@ -44,11 +45,7 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
               itemBuilder: ((context, index) {
                 final item = state.listMP[index];
 
-                return CardMp(
-                  materiaPrima: item.materiaPrima,
-                  custoUnitario: item.custoUnitario,
-                  dataUltimaAtualizacao: item.dataUltimaAtualizacao,
-                );
+                return CardMp(model: item);
               }),
             );
           }

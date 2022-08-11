@@ -29,7 +29,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(MyIcons.tasks),
-            title: const Text("Favoritos"),
+            title: const Text("Componentes"),
             onTap: () {
               Navigator.pop(context);
               //Navegar para outra página
