@@ -1,13 +1,5 @@
 import 'package:app_mcip/app/modules/componente/componente_module.dart';
 import 'package:app_mcip/app/repositories/auth/auth_repository.dart';
-import 'package:app_mcip/app/repositories/componente/componente_repository.dart';
-import 'package:app_mcip/app/repositories/componente/componente_repository_impl.dart';
-import 'package:app_mcip/app/repositories/materia-prima/materia_prima_repository.dart';
-import 'package:app_mcip/app/repositories/materia-prima/materia_prima_repository_impl.dart';
-import 'package:app_mcip/app/services/componente/componente_service.dart';
-import 'package:app_mcip/app/services/componente/componente_service_impl.dart';
-import 'package:app_mcip/app/services/materia-prima/materia_prima_service.dart';
-import 'package:app_mcip/app/services/materia-prima/materia_prima_service_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'modules/home/home_module.dart';
@@ -24,18 +16,6 @@ class AppModule extends Module {
         Bind.lazySingleton<AuthRepository>((i) => AuthRepositoryImpl()),
         Bind.lazySingleton<AuthService>(
             (i) => AuthServiceImpl(authRepository: i())),
-
-        // Materia Prima
-        Bind.lazySingleton<MateriaPrimaRepository>(
-            (i) => MateriaPrimaRepositoryImpl()),
-        Bind.lazySingleton<MateriaPrimaService>(
-            (i) => MateriaPrimaServiceImpl(materiaPrimaRepository: i())),
-
-        // Componente
-        Bind.lazySingleton<ComponenteRepository>(
-            (i) => ComponenteRepositoryImpl()),
-        Bind.lazySingleton<ComponenteService>(
-            (i) => ComponenteServiceImpl(componenteRepository: i())),
       ];
 
   @override

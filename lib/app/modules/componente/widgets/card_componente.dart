@@ -1,6 +1,7 @@
 import 'package:app_mcip/app/core/ui/theme_extension.dart';
 import 'package:app_mcip/app/models/componente_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/helpers/formatter.dart';
 
@@ -13,7 +14,10 @@ class CardComponente extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => Modular.to.pushNamed(
+        '/componente/detail',
+        arguments: componenteModel,
+      ),
       child: Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(5),
