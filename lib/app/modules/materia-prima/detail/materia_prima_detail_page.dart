@@ -146,21 +146,25 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
                     Padding(
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          final formValid =
-                              _formKey.currentState?.validate() ?? false;
-                          if (formValid) {
-                            _showAlertDialog(context);
-                            Navigator.pop(context);
-                          }
-                        },
-                        icon: const Icon(Icons.save),
-                        label: const Text('Salvar Valor'),
+                      child: SizedBox(
+                        width: 150,
+                        height: 50,
+                        child: ElevatedButton.icon(
+                          onPressed: () async {
+                            final formValid =
+                                _formKey.currentState?.validate() ?? false;
+                            if (formValid) {
+                              _showAlertDialog(context);
+                              Navigator.pop(context);
+                            }
+                          },
+                          icon: const Icon(Icons.save),
+                          label: const Text('Salvar'),
+                        ),
                       ),
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 20,
                     ),
                   ],
                 ),
@@ -204,7 +208,7 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
     );
 
     AlertDialog alert = AlertDialog(
-      title: const Text("Editar Matéria Prima"),
+      title: const Text("Matéria Prima"),
       content: const Text("Deseja Atualizar Custo Unitário?"),
       actions: [
         cancelaButton,

@@ -31,8 +31,7 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(MyIcons.tasks),
             title: const Text("Componentes"),
             onTap: () {
-              Navigator.pop(context);
-              //Navegar para outra página
+              Modular.to.pushNamed('/componente');
             },
           ),
         ],
