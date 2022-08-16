@@ -18,7 +18,7 @@ class _ComponentePageState extends State<ComponentePage> {
   void initState() {
     super.initState();
 
-    widget.componenteController.fetchAll('1');
+    widget.componenteController.fetchAll('99');
   }
 
   @override

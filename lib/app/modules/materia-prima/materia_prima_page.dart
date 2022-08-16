@@ -20,7 +20,7 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
     super.initState();
 
     // Busca Materias Primas
-    widget.materiaPrimaController.fetchAll('1');
+    widget.materiaPrimaController.fetchAll('99');
   }
 
   @override

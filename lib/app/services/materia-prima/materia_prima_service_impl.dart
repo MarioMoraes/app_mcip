@@ -12,4 +12,8 @@ class MateriaPrimaServiceImpl implements MateriaPrimaService {
   @override
   Future<List<MateriaPrimaModel>> getMateriaPrima(String empresaId) =>
       _materiaPrimaRepository.getMateriaPrima(empresaId);
+
+  @override
+  Future<void> updatePrice(String empresaId, String id, String custoUnitario) =>
+      _materiaPrimaRepository.updatePrice(empresaId, id, custoUnitario);
 }

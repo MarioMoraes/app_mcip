@@ -28,4 +28,25 @@ class MateriaPrimaRepositoryImpl implements MateriaPrimaRepository {
     }
     return [];
   }
+
+  @override
+  Future<void> updatePrice(
+      String empresaId, String id, String custoUnitario) async {
+    try {
+      final response = await _dio.post(
+        'https://masterbusiness.adm.br/api/update-curso.php',
+        data: {
+          'empresa_id': empresaId,
+          'id': id,
+          'custo_unitario': custoUnitario,
+        },
+      );
+
+      if (response.statusCode != 200) {
+        throw Failure();
+      }
+    } on Failure catch (e, s) {
+      log('Erro Consulta Materias Primas', error: e.message, stackTrace: s);
+    }
+  }
 }

@@ -26,6 +26,8 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
   final _formKey = GlobalKey<FormState>();
   final _custoEC = TextEditingController();
 
+  MoneyMaskedTextController controller = MoneyMaskedTextController();
+
   @override
   void dispose() {
     super.dispose();
@@ -118,7 +120,7 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
   }
 
   void _configurandoModalBottomSheet(context, model) {
-    var controller = MoneyMaskedTextController(
+    controller = MoneyMaskedTextController(
       initialValue: double.parse(model.custoUnitario),
     );
 
@@ -193,19 +195,25 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
     );
 
     Widget continuaButton = ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(primary: Colors.green.shade600),
-      icon: const Icon(
-        Icons.check,
-        color: Colors.white,
-      ),
-      label: const Text(
-        "Sim",
-        style: TextStyle(
+        style: ElevatedButton.styleFrom(primary: Colors.green.shade600),
+        icon: const Icon(
+          Icons.check,
           color: Colors.white,
         ),
-      ),
-      onPressed: () => Navigator.pop(buildContext),
-    );
+        label: const Text(
+          "Sim",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        onPressed: () {
+          widget.materiaPrimaDetailController.updatePrice(
+            widget.model.empresaId,
+            widget.model.id,
+            controller.text,
+          );
+          Navigator.pop(buildContext);
+        });
 
     AlertDialog alert = AlertDialog(
       title: const Text("Matéria Prima"),
