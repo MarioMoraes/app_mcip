@@ -53,6 +53,11 @@ class HomePage extends StatelessWidget {
                   icon: Icons.assessment,
                   function: () => Modular.to.pushNamed('/custo'),
                 ),
+                CardOptions(
+                  title: 'Lucro Real',
+                  icon: Icons.monetization_on,
+                  function: () => Modular.to.pushNamed('/real'),
+                ),
               ],
             ),
           ),

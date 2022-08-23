@@ -12,12 +12,18 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          const UserAccountsDrawerHeader(
-            accountEmail: Text("user@mail.com"),
-            accountName: Text("User"),
+          UserAccountsDrawerHeader(
+            accountEmail: const Text(
+              "user@mail.com",
+              style: TextStyle(fontWeight: FontWeight.w300),
+            ),
+            accountName: const Text(
+              "Username",
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.white,
-              child: Text("U"),
+              child: Image.asset('assets/images/profile.png'),
             ),
           ),
           ListTile(
@@ -48,6 +54,16 @@ class CustomDrawer extends StatelessWidget {
             title: const Text("Centro de Custo"),
             onTap: () {
               Modular.to.pushNamed('/custo');
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.monetization_on,
+              color: Colors.blue,
+            ),
+            title: const Text("Lucro Real"),
+            onTap: () {
+              Modular.to.pushNamed('/real');
             },
           ),
         ],
