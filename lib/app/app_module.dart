@@ -1,3 +1,4 @@
+import 'package:app_mcip/app/modules/centro-custo/centro_custo_module.dart';
 import 'package:app_mcip/app/modules/componente/componente_module.dart';
 import 'package:app_mcip/app/repositories/auth/auth_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -29,5 +30,8 @@ class AppModule extends Module {
             transition: TransitionType.rightToLeft),
         ModuleRoute('/componente',
             module: ComponenteModule(), transition: TransitionType.rightToLeft),
+        ModuleRoute('/custo',
+            module: CentroCustoModule(),
+            transition: TransitionType.rightToLeft),
       ];
 }

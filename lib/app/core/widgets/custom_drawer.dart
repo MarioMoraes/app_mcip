@@ -21,17 +21,33 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(MyIcons.beaker),
+            leading: const Icon(
+              MyIcons.beaker,
+              color: Colors.blue,
+            ),
             title: const Text("Matérias Primas"),
             onTap: () {
               Modular.to.pushNamed('/materia');
             },
           ),
           ListTile(
-            leading: const Icon(MyIcons.tasks),
+            leading: const Icon(
+              MyIcons.tasks,
+              color: Colors.blue,
+            ),
             title: const Text("Componentes"),
             onTap: () {
               Modular.to.pushNamed('/componente');
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.assessment,
+              color: Colors.blue,
+            ),
+            title: const Text("Centro de Custo"),
+            onTap: () {
+              Modular.to.pushNamed('/custo');
             },
           ),
         ],

@@ -50,8 +50,8 @@ class HomePage extends StatelessWidget {
                 ),
                 CardOptions(
                   title: 'Centro de Custo',
-                  icon: MyIcons.tasks,
-                  function: () => Modular.to.pushNamed('/componente'),
+                  icon: Icons.assessment,
+                  function: () => Modular.to.pushNamed('/custo'),
                 ),
               ],
             ),

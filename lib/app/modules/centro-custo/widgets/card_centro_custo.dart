@@ -1,22 +1,22 @@
 import 'package:app_mcip/app/core/ui/theme_extension.dart';
-import 'package:app_mcip/app/models/componente_model.dart';
+import 'package:app_mcip/app/models/centro_custo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/helpers/formatter.dart';
 
-class CardComponente extends StatelessWidget {
-  final ComponenteModel componenteModel;
+class CardCentroCusto extends StatelessWidget {
+  final CentroCustoModel centroCustoModel;
 
-  const CardComponente({Key? key, required this.componenteModel})
+  const CardCentroCusto({Key? key, required this.centroCustoModel})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Modular.to.pushNamed(
-        '/componente/detail',
-        arguments: componenteModel,
+        '/custo/detail',
+        arguments: centroCustoModel,
       ),
       child: Container(
         padding: const EdgeInsets.all(10),
@@ -34,11 +34,12 @@ class CardComponente extends StatelessWidget {
               style: TextStyle(fontSize: 12),
             ),
             Text(
-              componenteModel.componenteDesc,
+              centroCustoModel.centroCusto,
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: context.primaryColor),
+              overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(
               height: 5,
@@ -47,7 +48,7 @@ class CardComponente extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
                 Text(
-                  'Custo Total',
+                  'Custo Unitário',
                   style: TextStyle(fontSize: 12),
                 ),
                 Icon(
@@ -56,10 +57,10 @@ class CardComponente extends StatelessWidget {
                 ),
               ],
             ),
-            componenteModel.custoUnitarioTotal != ""
+            centroCustoModel.custoUnitarioCc != ""
                 ? Text(
                     Formatter.formatCurrency(
-                        double.parse(componenteModel.custoUnitarioTotal)),
+                        double.parse(centroCustoModel.custoUnitarioCc)),
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
