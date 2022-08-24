@@ -1,9 +1,11 @@
 import 'package:app_mcip/app/modules/lucro-real/controller/lucro_real_state.dart';
+import 'package:app_mcip/app/modules/lucro-real/widgets/card_lucro_real.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LucroRealPage extends StatefulWidget {
   final LucroRealController lucroRealController;
+
   const LucroRealPage({Key? key, required this.lucroRealController})
       : super(key: key);
 
@@ -38,8 +40,8 @@ class _LucroRealPageState extends State<LucroRealPage> {
             return ListView.builder(
               itemCount: state.listLR.length,
               itemBuilder: ((context, index) {
-                var cCusto = state.listLR[index];
-                return const Text('Status Code = 200 SUCCESS');
+                var model = state.listLR[index];
+                return CardLucroReal(lucroRealModel: model);
               }),
             );
           }
