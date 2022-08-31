@@ -1,11 +1,10 @@
-import 'package:app_mcip/app/core/ui/theme_extension.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? hint;
   final String? label;
   final bool obscureText;
-  final bool enabled;
+  final bool? enabled;
   final ValueNotifier<bool> _obscureTextVN;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
@@ -18,7 +17,7 @@ class CustomTextFormField extends StatelessWidget {
     this.enabled = true,
     this.controller,
     this.validator,
-  })  : _obscureTextVN = ValueNotifier<bool>(obscureText),
+  })  : _obscureTextVN = ValueNotifier(obscureText),
         super(key: key);
 
   @override
@@ -33,18 +32,10 @@ class CustomTextFormField extends StatelessWidget {
           obscureText: obscureTextVNValue,
           decoration: InputDecoration(
               filled: enabled,
-              fillColor: !enabled ? Colors.grey.shade200 : Colors.white,
+              fillColor:
+                  (enabled != null) ? Colors.grey.shade200 : Colors.white,
               isDense: true,
-              label: (label == '')
-                  ? const SizedBox.shrink()
-                  : Text(
-                      label!,
-                      style: TextStyle(
-                        color: context.primaryColor,
-                      ),
-                    ),
-              hintText: (hint == null) ? '' : hint!,
-              hintStyle: const TextStyle(color: Colors.black, fontSize: 14.0),
+              hintText: hint,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5.0),
                 borderSide: const BorderSide(color: Colors.white),
