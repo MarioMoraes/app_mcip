@@ -67,7 +67,7 @@ class CardLucroReal extends StatelessWidget {
                     ),
                   )
                 : const Text(
-                    'R\$ 0,00',
+                    '',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,

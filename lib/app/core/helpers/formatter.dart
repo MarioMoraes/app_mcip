@@ -11,4 +11,9 @@ class Formatter {
   static String formatCurrency(double value) {
     return _currencyFormat.format(value);
   }
+
+  static String formatPercent(double value) {
+    final _currencyFormat = NumberFormat.currency(locale: 'pt-BR', symbol: r'');
+    return _currencyFormat.format(value);
+  }
 }

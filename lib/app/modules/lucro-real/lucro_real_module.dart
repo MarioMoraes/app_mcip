@@ -1,3 +1,4 @@
+import 'package:app_mcip/app/modules/lucro-real/detail/lucro_real_detail_page.dart';
 import 'package:app_mcip/app/modules/lucro-real/lucro_real_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_bloc_bind/modular_bloc_bind.dart';
@@ -28,6 +29,13 @@ class LucroRealModule extends Module {
           child: (context, args) => LucroRealPage(
             lucroRealController: Modular.get<LucroRealController>(),
           ),
-        )
+        ),
+        ChildRoute(
+          '/detail',
+          child: (context, args) => LucroRealDetailPage(
+            lucroRealController: Modular.get<LucroRealController>(),
+            lucroRealModel: args.data,
+          ),
+        ),
       ];
 }
