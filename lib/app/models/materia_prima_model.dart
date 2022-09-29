@@ -4,7 +4,7 @@ class MateriaPrimaModel {
   final String empresaId;
   final String id;
   final String materiaPrima;
-  final String custoUnitario;
+  String custoUnitario;
   final String unidadeId;
   final String dataUltimaAtualizacao;
 

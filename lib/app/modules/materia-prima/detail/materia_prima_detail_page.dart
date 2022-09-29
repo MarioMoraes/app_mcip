@@ -7,6 +7,7 @@ import 'package:app_mcip/app/modules/materia-prima/detail/controller/materia_pri
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class MateriaPrimaDetailPage extends StatefulWidget {
   final MateriaPrimaDetailController materiaPrimaDetailController;
@@ -156,7 +157,6 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
                             final formValid =
                                 _formKey.currentState?.validate() ?? false;
                             if (formValid) {
-                              // await _showAlertDialog(context);
                               await widget.materiaPrimaDetailController
                                   .updatePrice(
                                 widget.model.empresaId,
@@ -164,7 +164,18 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
                                 controller.text,
                               );
 
-                              Modular.to.pop(context);
+                              Modular.to.pop(bc);
+                              showToast(
+                                "Matéria Prima Atualizada!",
+                                context: context,
+                                backgroundColor: Colors.blue.shade900,
+                                duration: const Duration(seconds: 4),
+                                position: StyledToastPosition.bottom,
+                              );
+
+                              widget.model.custoUnitario =
+                                  controller.text.replaceAll(',', '.');
+                              setState(() {});
                             }
                           },
                           icon: const Icon(Icons.save),
@@ -181,64 +192,6 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
             ],
           ),
         );
-      },
-    );
-  }
-
-  _showAlertDialog(BuildContext buildContext) {
-    Widget cancelaButton = ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red.shade600,
-        ),
-        icon: const Icon(
-          Icons.cancel,
-          color: Colors.white,
-        ),
-        label: const Text(
-          "Não",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        onPressed: () {
-          Modular.to.pop(context);
-        });
-
-    Widget continuaButton = ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(backgroundColor: Colors.green.shade600),
-        icon: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
-        label: const Text(
-          "Sim",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        onPressed: () {
-          widget.materiaPrimaDetailController.updatePrice(
-            widget.model.empresaId,
-            widget.model.id,
-            controller.text,
-          );
-          Modular.to.pop(context);
-          // Navigator.pop(context);
-        });
-
-    AlertDialog alert = AlertDialog(
-      title: const Text("Matéria Prima"),
-      content: const Text("Deseja Atualizar Custo Unitário?"),
-      actions: [
-        cancelaButton,
-        continuaButton,
-      ],
-    );
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
       },
     );
   }
