@@ -15,7 +15,10 @@ class CardMp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {Modular.to.pushNamed('/materia/detail', arguments: model)},
+      onTap: () async {
+        await Modular.to.pushNamed('/materia/detail', arguments: model);
+        Modular.to.pop(context);
+      },
       child: Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(5),

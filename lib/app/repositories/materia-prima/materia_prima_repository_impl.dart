@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 
 import './materia_prima_repository.dart';
 import '../../core/exceptions/failure.dart';
@@ -33,13 +34,11 @@ class MateriaPrimaRepositoryImpl implements MateriaPrimaRepository {
   Future<void> updatePrice(
       String empresaId, String id, String custoUnitario) async {
     try {
+      Intl.defaultLocale = 'en_US';
+      num custo = NumberFormat().parse(custoUnitario) / 100;
+
       final response = await _dio.post(
-        'https://masterbusiness.adm.br/api/update-custo.php',
-        data: {
-          'empresa_id': empresaId,
-          'id': id,
-          'custo_unitario': custoUnitario,
-        },
+        'https://masterbusiness.adm.br/api/update-custo.php?empresa_id=$empresaId&id=$id&custo_unitario=$custo',
       );
 
       if (response.statusCode != 200) {
