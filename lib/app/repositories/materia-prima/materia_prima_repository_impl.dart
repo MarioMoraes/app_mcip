@@ -34,7 +34,7 @@ class MateriaPrimaRepositoryImpl implements MateriaPrimaRepository {
       String empresaId, String id, String custoUnitario) async {
     try {
       final response = await _dio.post(
-        'https://masterbusiness.adm.br/api/update-curso.php',
+        'https://masterbusiness.adm.br/api/update-custo.php',
         data: {
           'empresa_id': empresaId,
           'id': id,

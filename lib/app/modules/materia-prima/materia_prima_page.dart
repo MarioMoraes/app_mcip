@@ -41,6 +41,8 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
 
           if (state is MateriaPrimaStateLoaded) {
             return ListView.builder(
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
               itemCount: state.listMP.length,
               itemBuilder: ((context, index) {
                 final item = state.listMP[index];

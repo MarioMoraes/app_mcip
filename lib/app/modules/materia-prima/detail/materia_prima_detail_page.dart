@@ -156,8 +156,15 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
                             final formValid =
                                 _formKey.currentState?.validate() ?? false;
                             if (formValid) {
-                              _showAlertDialog(context);
-                              Navigator.pop(context);
+                              // await _showAlertDialog(context);
+                              await widget.materiaPrimaDetailController
+                                  .updatePrice(
+                                widget.model.empresaId,
+                                widget.model.id,
+                                controller.text,
+                              );
+
+                              Modular.to.pop(context);
                             }
                           },
                           icon: const Icon(Icons.save),
@@ -180,22 +187,25 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
 
   _showAlertDialog(BuildContext buildContext) {
     Widget cancelaButton = ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(primary: Colors.red.shade600),
-      icon: const Icon(
-        Icons.cancel,
-        color: Colors.white,
-      ),
-      label: const Text(
-        "Não",
-        style: TextStyle(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red.shade600,
+        ),
+        icon: const Icon(
+          Icons.cancel,
           color: Colors.white,
         ),
-      ),
-      onPressed: () => Modular.to.pop(buildContext),
-    );
+        label: const Text(
+          "Não",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        onPressed: () {
+          Modular.to.pop(context);
+        });
 
     Widget continuaButton = ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(primary: Colors.green.shade600),
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.green.shade600),
         icon: const Icon(
           Icons.check,
           color: Colors.white,
@@ -212,7 +222,8 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
             widget.model.id,
             controller.text,
           );
-          Navigator.pop(buildContext);
+          Modular.to.pop(context);
+          // Navigator.pop(context);
         });
 
     AlertDialog alert = AlertDialog(
