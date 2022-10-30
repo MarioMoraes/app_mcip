@@ -21,6 +21,14 @@ class _LoginPageState extends State<LoginPage> {
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
 
+
+  @override
+  void initState() {
+    widget.loginController.signIn(''emai', password)
+    super.initState();
+  }
+
+
   @override
   void dispose() {
     super.dispose();
@@ -51,17 +59,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-/*
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 50, 20, 100),
-              child: Center(
-                child: Image.asset(
-                  '',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-*/
             Padding(
               padding: EdgeInsets.fromLTRB(20, _height, 20, 20),
               child: Container(

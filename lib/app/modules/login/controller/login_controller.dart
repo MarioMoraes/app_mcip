@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:app_mcip/app/models/user_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -17,8 +18,9 @@ class LoginController extends Cubit<LoginState> {
 
   Future<void> signIn(String email, String password) async {
     try {
-      emit(state.copyWith(loginStatus: LoginStatus.loading));
-      await _authService.signIn(email, password);
+      emit(state.copyWith(loginStatus: LoginStatus.loading, user: null));
+      final response = await _authService.signIn(email, password);
+      emit(state.copyWith(loginStatus: LoginStatus.success, user: response));
     } catch (e, s) {
       log('Erro Ao Realizar Login no Google', error: e, stackTrace: s);
       emit(state.copyWith(

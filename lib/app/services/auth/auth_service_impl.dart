@@ -1,3 +1,5 @@
+import 'package:app_mcip/app/models/user_model.dart';
+
 import './auth_service.dart';
 import '../../repositories/auth/auth_repository.dart';
 
@@ -9,6 +11,6 @@ class AuthServiceImpl implements AuthService {
   }) : _authRepository = authRepository;
 
   @override
-  Future<void> signIn(String email, String password) =>
+  Future<UserModel?> signIn(String email, String password) =>
       _authRepository.signIn(email, password);
 }
