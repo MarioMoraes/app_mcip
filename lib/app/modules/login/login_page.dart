@@ -21,13 +21,10 @@ class _LoginPageState extends State<LoginPage> {
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
 
-
   @override
   void initState() {
-    widget.loginController.signIn(''emai', password)
     super.initState();
   }
-
 
   @override
   void dispose() {
@@ -154,6 +151,8 @@ class _LoginPageState extends State<LoginPage> {
           final formValid = _formKey.currentState?.validate() ?? false;
 
           if (formValid) {
+            await widget.loginController
+                .signIn(_emailEC.text, _passwordEC.text, '99');
             Modular.to.pushReplacementNamed('/home');
           }
         },

@@ -11,6 +11,6 @@ class AuthServiceImpl implements AuthService {
   }) : _authRepository = authRepository;
 
   @override
-  Future<UserModel?> signIn(String email, String password) =>
-      _authRepository.signIn(email, password);
+  Future<UserModel?> signIn(String email, String password, String empresaId) =>
+      _authRepository.signIn(email, password, empresaId);
 }

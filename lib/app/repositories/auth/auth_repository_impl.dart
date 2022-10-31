@@ -3,26 +3,27 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:app_mcip/app/models/user_model.dart';
+import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 
 import './auth_repository.dart';
 import '../../core/exceptions/failure.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final Dio _dio;
-
-  AuthRepositoryImpl({
-    required Dio dio,
-  }) : _dio = dio;
+  final dio = Dio();
 
   @override
-  Future<UserModel?> signIn(String email, String password) async {
+  Future<UserModel?> signIn(
+      String email, String password, String empresaId) async {
     try {
-      final response = await _dio.get(
-        'https://masterbusiness.adm.br/api/user.php',
+      var bytes = utf8.encode(password);
+      var digest = md5.convert(bytes);
+
+      final response = await dio.get(
+        'https://23.20.160.129/app/api/user.php',
         queryParameters: {
-          'email': email,
-          'password': password,
+          'id': empresaId,
+          'login': email,
         },
       );
 

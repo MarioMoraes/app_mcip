@@ -5,8 +5,13 @@ import 'app/app_module.dart';
 import 'app/app_widget.dart';
 
 void main() async {
-  await Future.delayed(const Duration(seconds: 1));
-
+  WidgetsFlutterBinding.ensureInitialized();
+/*
+  ByteData data =
+      await PlatformAssetBundle().load('assets/ssh_aws_macbook.pem');
+  SecurityContext.defaultContext
+      .setTrustedCertificatesBytes(data.buffer.asUint8List());
+*/
   runApp(ModularApp(
     child: const AppWidget(),
     module: AppModule(),

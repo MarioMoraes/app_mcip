@@ -16,10 +16,10 @@ class LoginController extends Cubit<LoginState> {
   })  : _authService = authService,
         super(const LoginState.initial());
 
-  Future<void> signIn(String email, String password) async {
+  Future<void> signIn(String email, String password, String empresaId) async {
     try {
       emit(state.copyWith(loginStatus: LoginStatus.loading, user: null));
-      final response = await _authService.signIn(email, password);
+      final response = await _authService.signIn(email, password, empresaId);
       emit(state.copyWith(loginStatus: LoginStatus.success, user: response));
     } catch (e, s) {
       log('Erro Ao Realizar Login no Google', error: e, stackTrace: s);
