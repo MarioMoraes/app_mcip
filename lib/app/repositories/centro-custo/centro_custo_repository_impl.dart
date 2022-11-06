@@ -14,7 +14,7 @@ class CentroCustoRepositoryImpl implements CentroCustoRepository {
   Future<List<CentroCustoModel>> getAll(String empresaId) async {
     try {
       final response = await _dio.get(
-        'https://masterbusiness.adm.br/api/centro-custo.php',
+        'https://23.20.160.129/app/api/centro-custo.php',
         queryParameters: {'id': empresaId},
       );
 

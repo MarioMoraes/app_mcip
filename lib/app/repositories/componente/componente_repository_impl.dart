@@ -14,7 +14,7 @@ class ComponenteRepositoryImpl implements ComponenteRepository {
   Future<List<ComponenteModel>> fetchAll(String empresaId) async {
     try {
       final response = await _dio.get(
-        'https://masterbusiness.adm.br/api/componentes.php',
+        'https://23.20.160.129/app/api/componentes.php',
         queryParameters: {'id': empresaId},
       );
 

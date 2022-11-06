@@ -38,7 +38,7 @@ class MateriaPrimaRepositoryImpl implements MateriaPrimaRepository {
       num custo = NumberFormat().parse(custoUnitario) / 100;
 
       final response = await _dio.post(
-        'https://masterbusiness.adm.br/api/update-custo.php?empresa_id=$empresaId&id=$id&custo_unitario=$custo',
+        'https://23.20.160.129/app/api/update-custo.php?empresa_id=$empresaId&id=$id&custo_unitario=$custo',
       );
 
       if (response.statusCode != 200) {

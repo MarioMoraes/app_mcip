@@ -14,7 +14,7 @@ class LucroRealRepositoryImpl implements LucroRealRepository {
   Future<List<LucroRealModel>> getAll(String empresaId) async {
     try {
       final response = await _dio.get(
-        'https://masterbusiness.adm.br/api/lucro-real.php',
+        'https://23.20.160.129/app/api/lucro-real.php',
         queryParameters: {'id': empresaId},
       );
 
