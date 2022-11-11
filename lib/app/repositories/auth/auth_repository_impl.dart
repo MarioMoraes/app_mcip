@@ -24,6 +24,7 @@ class AuthRepositoryImpl implements AuthRepository {
         queryParameters: {
           'id': empresaId,
           'login': email,
+          'password': digest,
         },
       );
 
