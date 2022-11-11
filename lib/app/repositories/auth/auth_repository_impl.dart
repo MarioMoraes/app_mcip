@@ -27,15 +27,16 @@ class AuthRepositoryImpl implements AuthRepository {
           'password': digest,
         },
       );
-
-      if (response.statusCode == 200) {
-        var json = jsonDecode(response.data);
-        return UserModel.fromMap(json);
+      if (response) {
+        if (response.statusCode == 200) {
+          var json = jsonDecode(response.data);
+          return UserModel.fromMap(json);
+        }
       }
+      throw Exception();
     } on Failure catch (e, s) {
       log('Erro Consulta User', error: e.message, stackTrace: s);
       throw Exception();
     }
-    return null;
   }
 }

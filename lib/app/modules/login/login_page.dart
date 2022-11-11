@@ -1,6 +1,8 @@
 import 'package:app_mcip/app/core/ui/theme_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 import '../../core/widgets/button_with_loader.dart';
 import '../../core/widgets/custom_text_form_field.dart';
@@ -38,72 +40,85 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final _height = (MediaQuery.of(context).size.height / 2) * .60;
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    context.primaryColor,
-                    context.primaryColorLight.withOpacity(.5)
-                  ],
-                  begin: Alignment.bottomRight,
-                  end: Alignment.topLeft,
+    return BlocListener<LoginController, LoginState>(
+      bloc: widget.loginController,
+      listener: (context, state) {
+        if (state == LoginStatus.failure) {
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.error,
+            title: 'Oops...',
+            text: 'Sorry, something went wrong',
+          );
+        }
+      },
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      context.primaryColor,
+                      context.primaryColorLight.withOpacity(.5)
+                    ],
+                    begin: Alignment.bottomRight,
+                    end: Alignment.topLeft,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(20, _height, 20, 20),
-              child: Container(
-                height: MediaQuery.of(context).size.height * .45,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: const <BoxShadow>[
-                    BoxShadow(
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.only(right: 20, left: 20, bottom: 10),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 30),
-                        inputUserName(),
-                        const SizedBox(height: 7),
-                        inputPassword(),
-                        const SizedBox(height: 12),
-                        buttonForgotPassword(),
-                        const SizedBox(height: 20),
-                        buttonLogin(),
-                        const SizedBox(height: 15),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Master Business @${DateTime.now().year}",
-                            style: const TextStyle(
-                                color: Colors.black54,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        )
-                      ],
+              Padding(
+                padding: EdgeInsets.fromLTRB(20, _height, 20, 20),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * .45,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const <BoxShadow>[
+                      BoxShadow(
+                        blurRadius: 10,
+                        spreadRadius: 1,
+                        color: Colors.grey,
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(right: 20, left: 20, bottom: 10),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 30),
+                          inputUserName(),
+                          const SizedBox(height: 7),
+                          inputPassword(),
+                          const SizedBox(height: 12),
+                          buttonForgotPassword(),
+                          const SizedBox(height: 20),
+                          buttonLogin(),
+                          const SizedBox(height: 15),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Master Business @${DateTime.now().year}",
+                              style: const TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -154,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
             await widget.loginController
                 .signIn(_emailEC.text, _passwordEC.text, '99');
 
-            Modular.to.pushReplacementNamed('/home');
+            //Modular.to.pushReplacementNamed('/home');
           }
         },
         label: 'LOGIN',

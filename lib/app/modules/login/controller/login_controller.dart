@@ -20,7 +20,15 @@ class LoginController extends Cubit<LoginState> {
     try {
       emit(state.copyWith(loginStatus: LoginStatus.loading, user: null));
       final response = await _authService.signIn(email, password, empresaId);
-      emit(state.copyWith(loginStatus: LoginStatus.success, user: response));
+
+      if (response != null) {
+        if (response.active == 'Y') {
+          emit(
+              state.copyWith(loginStatus: LoginStatus.success, user: response));
+        }
+      }
+
+      emit(state.copyWith(loginStatus: LoginStatus.failure));
     } catch (e, s) {
       log('Erro Ao Realizar Login no Google', error: e, stackTrace: s);
       emit(state.copyWith(
