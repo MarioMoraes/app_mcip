@@ -10,6 +10,8 @@ class LoginStateInitial extends LoginState {}
 
 class LoginStateLoading extends LoginState {}
 
+class LoginStateVerifify extends LoginState {}
+
 class LoginStateLogged extends LoginState {
   final LoginStatus loginStatus;
   final UserModel? user;

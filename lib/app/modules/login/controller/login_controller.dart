@@ -17,7 +17,7 @@ class LoginController extends Cubit<LoginState> {
 
   Future<void> signIn(String email, String password, String empresaId) async {
     try {
-      emit(LoginStateLoading());
+      emit(LoginStateVerifify());
       final user = await _authService.signIn(email, password, empresaId);
 
       if (user.isNotEmpty) {
