@@ -2,6 +2,7 @@ import 'package:app_mcip/app/modules/centro-custo/controller/centro_custo_contro
 import 'package:app_mcip/app/modules/centro-custo/widgets/card_centro_custo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class CentroCustoPage extends StatefulWidget {
   final CentroCustoController centroCustoController;
@@ -31,9 +32,9 @@ class _CentroCustoPageState extends State<CentroCustoPage> {
         bloc: widget.centroCustoController,
         builder: (context, state) {
           if (state is CentroCustoStateLoading) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
+            return Center(
+                child: LoadingAnimationWidget.staggeredDotsWave(
+                    color: Colors.blue, size: 25));
           }
 
           if (state is CentroCustoStateLoaded) {

@@ -3,6 +3,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:quickalert/quickalert.dart';
 
 import '../../core/widgets/button_with_loader.dart';
@@ -113,10 +114,20 @@ class _LoginPageState extends State<LoginPage> {
                           BlocBuilder<LoginController, LoginState>(
                               bloc: widget.loginController,
                               builder: (context, state) {
+                                if (state is LoginStateLoading) {
+                                  return SizedBox(
+                                    height: 40,
+                                    child: Center(
+                                        child: LoadingAnimationWidget
+                                            .staggeredDotsWave(
+                                                color: Colors.blue, size: 25)),
+                                  );
+                                }
+
                                 if (state is LoginStateLoaded) {
                                   return DropdownSearch<String>(
                                     popupProps: const PopupProps.menu(
-                                      fit: FlexFit.loose,
+                                      fit: FlexFit.tight,
                                       menuProps: MenuProps(
                                         elevation: 5,
                                       ),

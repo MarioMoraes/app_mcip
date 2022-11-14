@@ -1,6 +1,7 @@
 import 'package:app_mcip/app/modules/materia-prima/widgets/card_mp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'controller/materia_prima_state.dart';
 
@@ -34,9 +35,9 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
         bloc: widget.materiaPrimaController,
         builder: (context, state) {
           if (state is MateriaPrimaStateLoading) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
+            return Center(
+                child: LoadingAnimationWidget.staggeredDotsWave(
+                    color: Colors.blue, size: 25));
           }
 
           if (state is MateriaPrimaStateLoaded) {

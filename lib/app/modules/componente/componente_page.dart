@@ -2,6 +2,7 @@ import 'package:app_mcip/app/modules/componente/controller/componente_state.dart
 import 'package:app_mcip/app/modules/componente/widgets/card_componente.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ComponentePage extends StatefulWidget {
   final ComponenteController componenteController;
@@ -31,9 +32,9 @@ class _ComponentePageState extends State<ComponentePage> {
           bloc: widget.componenteController,
           builder: (context, state) {
             if (state is ComponenteStateLoading) {
-              return const Center(
-                child: CircularProgressIndicator.adaptive(),
-              );
+              return Center(
+                  child: LoadingAnimationWidget.staggeredDotsWave(
+                      color: Colors.blue, size: 25));
             }
 
             if (state is ComponenteStateLoaded) {

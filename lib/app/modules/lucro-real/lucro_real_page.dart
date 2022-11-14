@@ -2,6 +2,7 @@ import 'package:app_mcip/app/modules/lucro-real/controller/lucro_real_state.dart
 import 'package:app_mcip/app/modules/lucro-real/widgets/card_lucro_real.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LucroRealPage extends StatefulWidget {
   final LucroRealController lucroRealController;
@@ -31,9 +32,9 @@ class _LucroRealPageState extends State<LucroRealPage> {
         bloc: widget.lucroRealController,
         builder: (context, state) {
           if (state is LucroRealStateLoading) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
+            return Center(
+                child: LoadingAnimationWidget.staggeredDotsWave(
+                    color: Colors.blue, size: 25));
           }
 
           if (state is LucroRealStateLoaded) {
