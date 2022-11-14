@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:app_mcip/app/models/empresa_model.dart';
 import 'package:app_mcip/app/models/user_model.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
@@ -27,7 +28,7 @@ class AuthRepositoryImpl implements AuthRepository {
           'password': digest,
         },
       );
-      if (response) {
+      if (response.data) {
         if (response.statusCode == 200) {
           var json = jsonDecode(response.data);
           return UserModel.fromMap(json);
@@ -38,5 +39,22 @@ class AuthRepositoryImpl implements AuthRepository {
       log('Erro Consulta User', error: e.message, stackTrace: s);
       throw Exception();
     }
+  }
+
+  @override
+  Future<List<EmpresaModel>> getCustomers() async {
+    try {
+      final response =
+          await dio.get('https://23.20.160.129/app/api/empresa.php');
+
+      if (response.statusCode == 200) {
+        var json = jsonDecode(response.data);
+        return (json as List).map((e) => EmpresaModel.fromMap(e)).toList();
+      }
+    } on DioError catch (e, s) {
+      log('Error ao Buscar Empresas', error: e, stackTrace: s);
+      throw Failure();
+    }
+    return [];
   }
 }

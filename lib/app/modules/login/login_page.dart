@@ -1,4 +1,6 @@
 import 'package:app_mcip/app/core/ui/theme_extension.dart';
+import 'package:app_mcip/app/models/empresa_model.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -25,6 +27,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
+    widget.loginController.getCustomers();
     super.initState();
   }
 
@@ -73,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: EdgeInsets.fromLTRB(20, _height, 20, 20),
                 child: Container(
-                  height: MediaQuery.of(context).size.height * .45,
+                  height: MediaQuery.of(context).size.height * .55,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -93,6 +96,14 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: [
                           const SizedBox(height: 30),
+                          BlocBuilder<LoginController, LoginState>(
+                              bloc: widget.loginController,
+                              builder: (context, state) {
+                                return DropdownSearch<EmpresaModel>(
+                                  items: state.listCustomer,
+                                );
+                              }),
+                          const SizedBox(height: 7),
                           inputUserName(),
                           const SizedBox(height: 7),
                           inputPassword(),
