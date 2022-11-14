@@ -14,7 +14,16 @@ class LoginController extends Cubit<LoginState> {
   })  : _authService = authService,
         super(LoginStateInitial());
 
-  Future<void> signIn(String email, String password, String empresaId) async {}
+  Future<void> signIn(String email, String password, String empresaId) async {
+    try {
+      emit(LoginStateLoading());
+      final logged = await _authService.signIn(email, password, empresaId);
+      emit(
+          LoginStateLoaded(loginStatus: LoginStatus.success, listCustomer: []));
+    } on Exception {
+      emit(LoginStateError());
+    }
+  }
 
   Future<void> getCustomers() async {
     try {

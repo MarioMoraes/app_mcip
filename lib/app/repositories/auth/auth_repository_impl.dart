@@ -28,7 +28,7 @@ class AuthRepositoryImpl implements AuthRepository {
           'password': digest,
         },
       );
-      if (response.data) {
+      if (response.data != null) {
         if (response.statusCode == 200) {
           var json = jsonDecode(response.data);
           return UserModel.fromMap(json);

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
+import '../../core/helpers/singleton.dart';
 import '../../core/widgets/button_with_loader.dart';
 import '../../core/widgets/custom_text_form_field.dart';
 import 'controller/login_controller.dart';
@@ -24,8 +25,8 @@ class _LoginPageState extends State<LoginPage> {
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
 
-  var _customerSelected = "";
   var _idSelected = 0;
+  var _empresaSelected = '';
 
   @override
   void initState() {
@@ -104,14 +105,19 @@ class _LoginPageState extends State<LoginPage> {
                                 if (state is LoginStateLoaded) {
                                   return DropdownSearch<String>(
                                     popupProps: const PopupProps.menu(
+                                      fit: FlexFit.loose,
+                                      menuProps: MenuProps(
+                                        elevation: 5,
+                                      ),
                                       showSelectedItems: true,
                                     ),
                                     onChanged: (value) {
                                       if (value != null) {
                                         final c = value.split('-');
+
                                         _idSelected = int.tryParse(c[0]) ?? 0;
+                                        _empresaSelected = c[1];
                                       }
-                                      _customerSelected = value ?? '';
                                     },
                                     items: state.listCustomer
                                         .map((e) => e.id + '-' + e.razaoSocial)
@@ -193,11 +199,9 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () async {
           final formValid = _formKey.currentState?.validate() ?? false;
 
-          print(_idSelected);
-
           if (formValid) {
-            await widget.loginController
-                .signIn(_emailEC.text, _passwordEC.text, '99');
+            await widget.loginController.signIn(
+                _emailEC.text, _passwordEC.text, _idSelected.toString());
 
             //Modular.to.pushReplacementNamed('/home');
           }
@@ -205,5 +209,12 @@ class _LoginPageState extends State<LoginPage> {
         label: 'LOGIN',
       ),
     );
+  }
+
+  saveInstance() {
+    var singleton = Singleton.instance;
+
+    singleton.idEmpresa = _idSelected;
+    singleton.nameEmpresa = _empresaSelected;
   }
 }
