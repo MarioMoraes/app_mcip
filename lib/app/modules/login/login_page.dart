@@ -54,7 +54,6 @@ class _LoginPageState extends State<LoginPage> {
               context: context,
               type: QuickAlertType.error,
               confirmBtnText: 'OK',
-              autoCloseDuration: const Duration(seconds: 3),
               text: 'Usuário/Senha Inválidos! Tente Novamente');
         }
 
@@ -65,7 +64,6 @@ class _LoginPageState extends State<LoginPage> {
           QuickAlert.show(
               context: context,
               confirmBtnText: 'OK',
-              autoCloseDuration: const Duration(seconds: 3),
               type: QuickAlertType.error,
               text: 'Acesso Não Permitido! Contacte o Administrador');
         }
