@@ -2,6 +2,7 @@ import 'package:app_mcip/app/models/empresa_model.dart';
 import 'package:app_mcip/app/models/user_model.dart';
 import 'package:bloc/bloc.dart';
 
+import '../../../core/helpers/singleton.dart';
 import '../../../services/auth/auth_service.dart';
 
 part 'login_state.dart';
@@ -17,9 +18,20 @@ class LoginController extends Cubit<LoginState> {
   Future<void> signIn(String email, String password, String empresaId) async {
     try {
       emit(LoginStateLoading());
-      final logged = await _authService.signIn(email, password, empresaId);
-      emit(
-          LoginStateLoaded(loginStatus: LoginStatus.success, listCustomer: []));
+      final user = await _authService.signIn(email, password, empresaId);
+
+      if (user.isNotEmpty) {
+        final userSys = user[0];
+        if (userSys?.active == 'Y') {
+          saveInstance(userSys!);
+          emit(LoginStateLogged(
+              loginStatus: LoginStatus.success, user: userSys));
+        } else {
+          emit(LoginStateUserInvalid());
+        }
+      } else {
+        emit(LoginStateError());
+      }
     } on Exception {
       emit(LoginStateError());
     }
@@ -36,9 +48,11 @@ class LoginController extends Cubit<LoginState> {
     }
   }
 
-  /*
-  void signOut() async {
-    await _authService.signOut();
+  saveInstance(UserModel model) {
+    var singleton = Singleton.instance;
+
+    singleton.idEmpresa = model.empresaId;
+    singleton.nameEmpresa = model.login;
+    singleton.emailEmpresa = model.email;
   }
-  */
 }

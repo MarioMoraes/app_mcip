@@ -2,10 +2,9 @@ import 'package:app_mcip/app/core/ui/theme_extension.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quickalert/models/quickalert_type.dart';
-import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:quickalert/quickalert.dart';
 
-import '../../core/helpers/singleton.dart';
 import '../../core/widgets/button_with_loader.dart';
 import '../../core/widgets/custom_text_form_field.dart';
 import 'controller/login_controller.dart';
@@ -49,13 +48,25 @@ class _LoginPageState extends State<LoginPage> {
     return BlocListener<LoginController, LoginState>(
       bloc: widget.loginController,
       listener: (context, state) {
-        if (state == LoginStatus.failure) {
+        if (state is LoginStateError) {
           QuickAlert.show(
-            context: context,
-            type: QuickAlertType.error,
-            title: 'Oops...',
-            text: 'Sorry, something went wrong',
-          );
+              context: context,
+              type: QuickAlertType.error,
+              confirmBtnText: 'OK',
+              autoCloseDuration: const Duration(seconds: 3),
+              text: 'Usuário/Senha Inválidos! Tente Novamente');
+        }
+
+        if (state is LoginStateLogged) {
+          Modular.to.pushNamed('/home');
+        }
+        if (state is LoginStateUserInvalid) {
+          QuickAlert.show(
+              context: context,
+              confirmBtnText: 'OK',
+              autoCloseDuration: const Duration(seconds: 3),
+              type: QuickAlertType.error,
+              text: 'Acesso Não Permitido! Contacte o Administrador');
         }
       },
       child: Scaffold(
@@ -160,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget inputUserName() {
     return CustomTextFormField(
-      hint: 'Email',
+      hint: 'Usuário',
       controller: _emailEC,
     );
   }
@@ -202,19 +213,10 @@ class _LoginPageState extends State<LoginPage> {
           if (formValid) {
             await widget.loginController.signIn(
                 _emailEC.text, _passwordEC.text, _idSelected.toString());
-
-            //Modular.to.pushReplacementNamed('/home');
           }
         },
         label: 'LOGIN',
       ),
     );
-  }
-
-  saveInstance() {
-    var singleton = Singleton.instance;
-
-    singleton.idEmpresa = _idSelected;
-    singleton.nameEmpresa = _empresaSelected;
   }
 }

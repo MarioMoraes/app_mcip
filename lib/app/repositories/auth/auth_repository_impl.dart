@@ -14,7 +14,7 @@ class AuthRepositoryImpl implements AuthRepository {
   final dio = Dio();
 
   @override
-  Future<UserModel?> signIn(
+  Future<List<UserModel?>> signIn(
       String email, String password, String empresaId) async {
     try {
       var bytes = utf8.encode(password);
@@ -28,10 +28,12 @@ class AuthRepositoryImpl implements AuthRepository {
           'password': digest,
         },
       );
-      if (response.data != null) {
-        if (response.statusCode == 200) {
-          var json = jsonDecode(response.data);
-          return UserModel.fromMap(json);
+      if (response.statusCode == 200) {
+        var json = jsonDecode(response.data);
+        if (json != null) {
+          return (json as List).map((e) => UserModel.fromMap(e)).toList();
+        } else {
+          throw Exception();
         }
       }
       throw Exception();

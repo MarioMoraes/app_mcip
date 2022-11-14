@@ -1,3 +1,4 @@
+import 'package:app_mcip/app/core/helpers/singleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -13,13 +14,13 @@ class CustomDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountEmail: const Text(
-              "user@mail.com",
-              style: TextStyle(fontWeight: FontWeight.w300),
+            accountEmail: Text(
+              Singleton.instance.emailEmpresa,
+              style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 12),
             ),
-            accountName: const Text(
-              "Username",
-              style: TextStyle(fontWeight: FontWeight.w700),
+            accountName: Text(
+              Singleton.instance.nameEmpresa.toUpperCase(),
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
             ),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.white,
