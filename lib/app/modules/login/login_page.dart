@@ -1,5 +1,4 @@
 import 'package:app_mcip/app/core/ui/theme_extension.dart';
-import 'package:app_mcip/app/models/empresa_model.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +23,9 @@ class _LoginPageState extends State<LoginPage> {
 
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
+
+  var _customerSelected = "";
+  var _idSelected = 0;
 
   @override
   void initState() {
@@ -76,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: EdgeInsets.fromLTRB(20, _height, 20, 20),
                 child: Container(
-                  height: MediaQuery.of(context).size.height * .55,
+                  height: MediaQuery.of(context).size.height * .50,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -99,9 +101,24 @@ class _LoginPageState extends State<LoginPage> {
                           BlocBuilder<LoginController, LoginState>(
                               bloc: widget.loginController,
                               builder: (context, state) {
-                                return DropdownSearch<EmpresaModel>(
-                                  items: state.listCustomer,
-                                );
+                                if (state is LoginStateLoaded) {
+                                  return DropdownSearch<String>(
+                                    popupProps: const PopupProps.menu(
+                                      showSelectedItems: true,
+                                    ),
+                                    onChanged: (value) {
+                                      if (value != null) {
+                                        final c = value.split('-');
+                                        _idSelected = int.tryParse(c[0]) ?? 0;
+                                      }
+                                      _customerSelected = value ?? '';
+                                    },
+                                    items: state.listCustomer
+                                        .map((e) => e.id + '-' + e.razaoSocial)
+                                        .toList(),
+                                  );
+                                }
+                                return const SizedBox.shrink();
                               }),
                           const SizedBox(height: 7),
                           inputUserName(),
@@ -175,6 +192,8 @@ class _LoginPageState extends State<LoginPage> {
         selector: (state) => state == LoginStatus.loading,
         onPressed: () async {
           final formValid = _formKey.currentState?.validate() ?? false;
+
+          print(_idSelected);
 
           if (formValid) {
             await widget.loginController

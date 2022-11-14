@@ -20,7 +20,6 @@ class EmpresaModel {
   String nro;
   String tipoLogradouro;
   String percentualEncargosSociais;
-  String? ativoAte;
 
   EmpresaModel({
     required this.id,
@@ -42,7 +41,6 @@ class EmpresaModel {
     required this.nro,
     required this.tipoLogradouro,
     required this.percentualEncargosSociais,
-    this.ativoAte,
   });
 
   Map<String, dynamic> toMap() {
@@ -66,7 +64,6 @@ class EmpresaModel {
       'nro': nro,
       'tipo_logradouro': tipoLogradouro,
       'percentual_encargos_sociais': percentualEncargosSociais,
-      'ativo_ate': ativoAte,
     };
   }
 
@@ -91,7 +88,6 @@ class EmpresaModel {
       nro: map['nro'] as String,
       tipoLogradouro: map['tipo_logradouro'] as String,
       percentualEncargosSociais: map['percentual_encargos_sociais'] as String,
-      ativoAte: map['ativo_ate'] != null ? map['ativoAte'] as String : null,
     );
   }
 
