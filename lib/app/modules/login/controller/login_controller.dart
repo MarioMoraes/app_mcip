@@ -30,10 +30,10 @@ class LoginController extends Cubit<LoginState> {
           emit(LoginStateUserInvalid());
         }
       } else {
-        emit(LoginStateError());
+        emit(LoginStateUserInvalid());
       }
     } on Exception {
-      emit(LoginStateError());
+      emit(LoginStateUserInvalid());
     }
   }
 
