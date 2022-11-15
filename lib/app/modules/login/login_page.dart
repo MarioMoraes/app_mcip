@@ -48,6 +48,11 @@ class _LoginPageState extends State<LoginPage> {
     return BlocListener<LoginController, LoginState>(
       bloc: widget.loginController,
       listener: (context, state) {
+        // Logged
+        if (state is LoginStateLogged) {
+          Modular.to.pushNamed('/home');
+        }
+        // Access Invalid
         if (state is LoginStateError) {
           QuickAlert.show(
               context: context,
@@ -55,10 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               confirmBtnText: 'OK',
               text: 'Usuário/Senha Inválidos! Tente Novamente');
         }
-
-        if (state is LoginStateLogged) {
-          Modular.to.pushNamed('/home');
-        }
+        // Access Not Permited
         if (state is LoginStateUserInvalid) {
           QuickAlert.show(
               context: context,

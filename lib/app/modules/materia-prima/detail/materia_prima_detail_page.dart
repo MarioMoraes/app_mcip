@@ -7,7 +7,7 @@ import 'package:app_mcip/app/modules/materia-prima/detail/controller/materia_pri
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+import 'package:quickalert/quickalert.dart';
 
 class MateriaPrimaDetailPage extends StatefulWidget {
   final MateriaPrimaDetailController materiaPrimaDetailController;
@@ -165,12 +165,14 @@ class _MateriaPrimaDetailPageState extends State<MateriaPrimaDetailPage> {
                               );
 
                               Modular.to.pop(bc);
-                              showToast(
-                                "Matéria Prima Atualizada!",
+
+                              QuickAlert.show(
                                 context: context,
-                                backgroundColor: Colors.blue.shade900,
-                                duration: const Duration(seconds: 4),
-                                position: StyledToastPosition.bottom,
+                                confirmBtnText: 'OK',
+                                width: 10,
+                                type: QuickAlertType.success,
+                                title: 'Cadastro Atualizado',
+                                animType: QuickAlertAnimType.slideInDown,
                               );
 
                               widget.model.custoUnitario =
