@@ -1,3 +1,4 @@
+import 'package:app_mcip/app/core/helpers/singleton.dart';
 import 'package:app_mcip/app/modules/lucro-real/controller/lucro_real_state.dart';
 import 'package:app_mcip/app/modules/lucro-real/widgets/card_lucro_real.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _LucroRealPageState extends State<LucroRealPage> {
   @override
   void initState() {
     super.initState();
-    widget.lucroRealController.fetchAll('99');
+    widget.lucroRealController.fetchAll(Singleton.instance.idEmpresa);
   }
 
   @override

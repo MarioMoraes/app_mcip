@@ -1,3 +1,4 @@
+import 'package:app_mcip/app/core/helpers/singleton.dart';
 import 'package:app_mcip/app/modules/materia-prima/widgets/card_mp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,7 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
     super.initState();
 
     // Busca Materias Primas
-    widget.materiaPrimaController.fetchAll('99');
+    widget.materiaPrimaController.fetchAll(Singleton.instance.idEmpresa);
   }
 
   @override

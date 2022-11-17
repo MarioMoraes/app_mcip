@@ -1,3 +1,4 @@
+import 'package:app_mcip/app/core/helpers/singleton.dart';
 import 'package:app_mcip/app/modules/componente/controller/componente_state.dart';
 import 'package:app_mcip/app/modules/componente/widgets/card_componente.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _ComponentePageState extends State<ComponentePage> {
   void initState() {
     super.initState();
 
-    widget.componenteController.fetchAll('99');
+    widget.componenteController.fetchAll(Singleton.instance.idEmpresa);
   }
 
   @override

@@ -42,9 +42,6 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/icons/
-    - assets/ssh_aws_macbook.pem
-
 
   fonts:
     - family: MontSerrat

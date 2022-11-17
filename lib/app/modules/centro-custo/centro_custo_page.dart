@@ -1,3 +1,4 @@
+import 'package:app_mcip/app/core/helpers/singleton.dart';
 import 'package:app_mcip/app/modules/centro-custo/controller/centro_custo_controller.dart';
 import 'package:app_mcip/app/modules/centro-custo/widgets/card_centro_custo.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _CentroCustoPageState extends State<CentroCustoPage> {
   @override
   void initState() {
     super.initState();
-    widget.centroCustoController.fetchAll('99');
+    widget.centroCustoController.fetchAll(Singleton.instance.idEmpresa);
   }
 
   @override
