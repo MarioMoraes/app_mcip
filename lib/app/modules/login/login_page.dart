@@ -49,8 +49,8 @@ class _LoginPageState extends State<LoginPage> {
       bloc: widget.loginController,
       listener: (context, state) {
         // Logged
-        if (state is LoginStateLogged) {
-          Modular.to.pushNamed('/home');
+        if (state is LoginStateLoginChecked) {
+          Modular.to.pushReplacementNamed('/home');
         }
         // Access Invalid
         if (state is LoginStateError) {

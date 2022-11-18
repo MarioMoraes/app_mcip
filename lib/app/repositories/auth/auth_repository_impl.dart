@@ -33,11 +33,9 @@ class AuthRepositoryImpl implements AuthRepository {
         if (json != null) {
           return (json as List).map((e) => UserModel.fromMap(e)).toList();
         } else {
-          print('senha nao confere');
           throw Exception();
         }
       }
-      print('user access not permitted');
       throw Exception();
     } on Failure catch (e, s) {
       log('Erro Consulta User', error: e.message, stackTrace: s);

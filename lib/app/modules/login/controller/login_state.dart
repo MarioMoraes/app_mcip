@@ -10,13 +10,13 @@ class LoginStateInitial extends LoginState {}
 
 class LoginStateLoading extends LoginState {}
 
-class LoginStateVerifify extends LoginState {}
+class LoginStateLoginCheck extends LoginState {}
 
-class LoginStateLogged extends LoginState {
+class LoginStateLoginChecked extends LoginState {
   final LoginStatus loginStatus;
   final UserModel? user;
 
-  LoginStateLogged({required this.loginStatus, this.user});
+  LoginStateLoginChecked({required this.loginStatus, this.user});
 
   List<Object> get props => [loginStatus, user ?? ''];
 }

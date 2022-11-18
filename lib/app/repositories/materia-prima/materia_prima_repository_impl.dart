@@ -15,7 +15,7 @@ class MateriaPrimaRepositoryImpl implements MateriaPrimaRepository {
   Future<List<MateriaPrimaModel>> getMateriaPrima(String empresaId) async {
     try {
       final response = await _dio.get(
-        'https://masterbusiness.adm.br/api/materia-prima.php',
+        'https://23.20.160.129/app/api/materia-prima.php',
         queryParameters: {'id': empresaId},
       );
 
