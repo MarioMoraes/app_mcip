@@ -12,6 +12,6 @@ class ProductsServiceImpl extends ProductsService {
 
   @override
   Future<List<LucroRealDetailModel>> getProducts(
-          String empresaId, String tabelaId, String productId) =>
-      _productsRepository.getProducts(empresaId, tabelaId, productId);
+          String empresaId, String tabelaId) =>
+      _productsRepository.getProducts(empresaId, tabelaId);
 }

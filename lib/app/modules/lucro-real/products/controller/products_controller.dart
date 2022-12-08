@@ -9,13 +9,11 @@ class ProductsController extends Cubit<ProductsState> {
   Future<void> getProducts(
     String empresaId,
     String tabelaId,
-    String productId,
   ) async {
     try {
       emit(ProductsStateLoading());
 
-      final response =
-          await productsService.getProducts(empresaId, tabelaId, productId);
+      final response = await productsService.getProducts(empresaId, tabelaId);
 
       emit(ProductsStateLoaded(lr: response));
     } on Exception {

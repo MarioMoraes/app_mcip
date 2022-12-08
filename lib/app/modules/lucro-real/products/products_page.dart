@@ -1,7 +1,10 @@
 import 'package:app_mcip/app/core/helpers/singleton.dart';
 import 'package:app_mcip/app/models/lucro_real_model.dart';
 import 'package:app_mcip/app/modules/lucro-real/products/controller/products_state.dart';
+import 'package:app_mcip/app/modules/lucro-real/products/widgets/card_product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ProductsPage extends StatefulWidget {
   final ProductsController controller;
@@ -17,17 +20,38 @@ class ProductsPage extends StatefulWidget {
 class _ProductsPageState extends State<ProductsPage> {
   @override
   void initState() {
-    widget.controller.getProducts(Singleton.instance.idEmpresa, '22', '');
+    widget.controller
+        .getProducts(Singleton.instance.idEmpresa, widget.model.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(''),
-      ),
-      body: Container(),
-    );
+        appBar: AppBar(
+          title: const Text('Componentes'),
+        ),
+        body: BlocBuilder<ProductsController, ProductsState>(
+          bloc: widget.controller,
+          builder: (context, state) {
+            if (state is ProductsStateLoading) {
+              return Center(
+                  child: LoadingAnimationWidget.staggeredDotsWave(
+                      color: Colors.blue, size: 25));
+            }
+
+            if (state is ProductsStateLoaded) {
+              return ListView.builder(
+                itemCount: state.lr.length,
+                itemBuilder: ((context, index) {
+                  final item = state.lr[index];
+
+                  return CardProduct(model: item);
+                }),
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ));
   }
 }

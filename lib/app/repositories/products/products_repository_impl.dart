@@ -14,15 +14,13 @@ class ProductsRepositoryImpl extends ProductsRepository {
   Future<List<LucroRealDetailModel>> getProducts(
     String empresaId,
     String tabelaId,
-    String productId,
   ) async {
     try {
       final response = await dio.get(
         'https://23.20.160.129/app/api/lucro-real-detail.php',
         queryParameters: {
-          'id': empresaId,
+          'empresa_id': empresaId,
           'tabela_id': tabelaId,
-          'produto_id': productId
         },
       );
 
@@ -30,7 +28,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
         var json = jsonDecode(response.data);
 
         return (json as List)
-            .map((e) => LucroRealDetailModel.fromMap(e))
+            .map<LucroRealDetailModel>((e) => LucroRealDetailModel.fromMap(e))
             .toList();
       }
     } on Failure catch (e, s) {

@@ -53,7 +53,10 @@ class LucroRealModule extends Module {
         ),
         ChildRoute(
           '/products',
-          child: (context, args) => const ProductsPage(),
+          child: (context, args) => ProductsPage(
+            controller: Modular.get<ProductsController>(),
+            model: args.data,
+          ),
         ),
       ];
 }
