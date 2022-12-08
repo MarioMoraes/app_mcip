@@ -84,7 +84,7 @@ class _LucroRealDetailPageState extends State<LucroRealDetailPage> {
               title: 'Recalculando...',
               animType: QuickAlertAnimType.slideInDown,
               autoCloseDuration: const Duration(seconds: 5));
-          Modular.to.pushNamed('/home');
+          Modular.to.pushNamed('/real/products');
         }
       },
       child: Scaffold(
