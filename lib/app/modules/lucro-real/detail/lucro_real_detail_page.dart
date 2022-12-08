@@ -6,9 +6,11 @@ import 'package:app_mcip/app/modules/lucro-real/controller/lucro_real_state.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:quickalert/quickalert.dart';
 
 import '../../../core/helpers/formatter.dart';
+import '../../../core/helpers/singleton.dart';
 
 class LucroRealDetailPage extends StatefulWidget {
   final LucroRealController lucroRealController;
@@ -73,16 +75,16 @@ class _LucroRealDetailPageState extends State<LucroRealDetailPage> {
   Widget build(BuildContext context) {
     return BlocListener<LucroRealController, LucroRealState>(
       bloc: widget.lucroRealController,
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is LucroRealStateComplete) {
-          QuickAlert.show(
-            context: context,
-            width: 10,
-            text: 'Valores Atualizados com Sucesso!',
-            type: QuickAlertType.success,
-            title: 'Recalculando...',
-            animType: QuickAlertAnimType.slideInDown,
-          );
+          await QuickAlert.show(
+              context: context,
+              width: 10,
+              type: QuickAlertType.loading,
+              title: 'Recalculando...',
+              animType: QuickAlertAnimType.slideInDown,
+              autoCloseDuration: const Duration(seconds: 5));
+          Modular.to.pushNamed('/home');
         }
       },
       child: Scaffold(
@@ -258,7 +260,7 @@ class _LucroRealDetailPageState extends State<LucroRealDetailPage> {
 
   _saveData() async {
     widget.lucroRealController.save(
-      id: widget.lucroRealModel.id,
+      id: Singleton.instance.idEmpresa,
       percIcms: _icms.text,
       percPis: _pis.text,
       percConfins: _confins.text,
