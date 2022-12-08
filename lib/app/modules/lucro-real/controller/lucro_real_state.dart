@@ -1,6 +1,7 @@
-import 'package:app_mcip/app/models/lucro_real_model.dart';
-import 'package:app_mcip/app/services/lucro-real/lucro_real_service.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../models/lucro_real_model.dart';
+import '../../../services/lucro-real/lucro_real_service.dart';
 
 part 'lucro_real_controller.dart';
 
@@ -19,5 +20,7 @@ class LucroRealStateLoaded extends LucroRealState {
 
   List<Object> get props => [listLR];
 }
+
+class LucroRealStateComplete extends LucroRealState {}
 
 class LucroRealStateError extends LucroRealState {}

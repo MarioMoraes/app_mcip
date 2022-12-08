@@ -12,4 +12,40 @@ class LucroRealController extends Cubit<LucroRealState> {
     var listLR = await _lucroRealService.getAll(empresaId);
     emit(LucroRealStateLoaded(listLR: listLR));
   }
+
+  Future<void> save({
+    id,
+    percIcms,
+    percPis,
+    percConfins,
+    percComissao,
+    percFrete,
+    percDespAdm,
+    percDespCom,
+    percDespDir,
+    percDespFin,
+    lucro,
+  }) async {
+    emit(LucroRealStateLoading());
+
+    try {
+      await _lucroRealService.saveData(
+        id,
+        percIcms,
+        percPis,
+        percConfins,
+        percComissao,
+        percFrete,
+        percDespAdm,
+        percDespCom,
+        percDespDir,
+        percDespFin,
+        lucro,
+      );
+
+      emit(LucroRealStateComplete());
+    } on Exception {
+      emit(LucroRealStateError());
+    }
+  }
 }

@@ -4,7 +4,9 @@ import 'package:app_mcip/app/core/widgets/custom_text_form_field_with_hint.dart'
 import 'package:app_mcip/app/models/lucro_real_model.dart';
 import 'package:app_mcip/app/modules/lucro-real/controller/lucro_real_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../../core/helpers/formatter.dart';
 
@@ -44,7 +46,6 @@ class _LucroRealDetailPageState extends State<LucroRealDetailPage> {
   @override
   void initState() {
     super.initState();
-
     _setData();
   }
 
@@ -70,122 +71,139 @@ class _LucroRealDetailPageState extends State<LucroRealDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Lucro Real'),
-      ),
-      bottomNavigationBar: ElevatedButton.icon(
-          onPressed: () {},
-          icon: const Icon(Icons.save),
-          label: const Text('Salvar')),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ListView(
-            children: [
-              const SizedBox(height: 10),
-              CustomTextFormField(
-                controller: _simulacao,
-                hint: 'Simulação',
-                enabled: false,
-              ),
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomTextFormFieldWithHint(
-                      hint: 'ICMS %',
-                      controller: _icms,
+    return BlocListener<LucroRealController, LucroRealState>(
+      bloc: widget.lucroRealController,
+      listener: (context, state) {
+        if (state is LucroRealStateComplete) {
+          QuickAlert.show(
+            context: context,
+            width: 10,
+            text: 'Valores Atualizados com Sucesso!',
+            type: QuickAlertType.success,
+            title: 'Recalculando...',
+            animType: QuickAlertAnimType.slideInDown,
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Lucro Real'),
+        ),
+        bottomNavigationBar: ElevatedButton.icon(
+            onPressed: () {
+              _saveData();
+            },
+            icon: const Icon(Icons.save),
+            label: const Text('Salvar')),
+        body: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListView(
+              children: [
+                const SizedBox(height: 10),
+                CustomTextFormField(
+                  controller: _simulacao,
+                  hint: 'Simulação',
+                  enabled: false,
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextFormFieldWithHint(
+                        hint: 'ICMS %',
+                        controller: _icms,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: CustomTextFormFieldWithHint(
-                      controller: _pis,
-                      hint: 'PIS %',
+                    const SizedBox(
+                      width: 10,
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomTextFormFieldWithHint(
-                      controller: _confins,
-                      hint: 'CONFINS %',
+                    Expanded(
+                      child: CustomTextFormFieldWithHint(
+                        controller: _pis,
+                        hint: 'PIS %',
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: CustomTextFormFieldWithHint(
-                      controller: _comissao,
-                      hint: 'Comissão %',
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextFormFieldWithHint(
+                        controller: _confins,
+                        hint: 'CONFINS %',
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomTextFormFieldWithHint(
-                      controller: _frete,
-                      hint: 'Frete %',
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: CustomTextFormFieldWithHint(
+                        controller: _comissao,
+                        hint: 'Comissão %',
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: CustomTextFormFieldWithHint(
-                      controller: _despesaAdm,
-                      hint: 'Despesa Adm %',
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextFormFieldWithHint(
+                        controller: _frete,
+                        hint: 'Frete %',
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomTextFormFieldWithHint(
-                      controller: _despesaCom,
-                      hint: 'Despesa Coml %',
+                    const SizedBox(
+                      width: 10,
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: CustomTextFormFieldWithHint(
-                      controller: _despesaDir,
-                      hint: 'Despesa Diretoria %',
+                    Expanded(
+                      child: CustomTextFormFieldWithHint(
+                        controller: _despesaAdm,
+                        hint: 'Despesa Adm %',
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomTextFormFieldWithHint(
-                      controller: _despesaFin,
-                      hint: 'Despesa Fin %',
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextFormFieldWithHint(
+                        controller: _despesaCom,
+                        hint: 'Despesa Coml %',
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: CustomTextFormFieldWithHint(
-                      controller: _lucroLiquido,
-                      hint: 'Lucro Líquido %',
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: CustomTextFormFieldWithHint(
+                        controller: _despesaDir,
+                        hint: 'Despesa Diretoria %',
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextFormFieldWithHint(
+                        controller: _despesaFin,
+                        hint: 'Despesa Fin %',
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: CustomTextFormFieldWithHint(
+                        controller: _lucroLiquido,
+                        hint: 'Lucro Líquido %',
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -236,9 +254,21 @@ class _LucroRealDetailPageState extends State<LucroRealDetailPage> {
     var calculo = 100 - totalImpostos;
     var calculo2 = calculo / 100;
     var calculo3 = 1 / calculo2;
+  }
 
-    print(calculo);
-    print(calculo2);
-    print(calculo3);
+  _saveData() async {
+    widget.lucroRealController.save(
+      id: widget.lucroRealModel.id,
+      percIcms: _icms.text,
+      percPis: _pis.text,
+      percConfins: _confins.text,
+      percComissao: _comissao.text,
+      percFrete: _frete.text,
+      percDespAdm: _despesaAdm.text,
+      percDespCom: _despesaCom.text,
+      percDespDir: _despesaDir.text,
+      percDespFin: _despesaFin.text,
+      lucro: _lucroLiquido.text,
+    );
   }
 }

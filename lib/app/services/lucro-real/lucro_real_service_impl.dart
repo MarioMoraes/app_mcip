@@ -13,4 +13,30 @@ class LucroRealServiceImpl implements LucroRealService {
   @override
   Future<List<LucroRealModel>> getAll(String empresaId) =>
       _lucroRealRepository.getAll(empresaId);
+
+  @override
+  Future<void> saveData(
+          String id,
+          String percIcms,
+          String percPis,
+          String percConfins,
+          String percComissao,
+          String percFrete,
+          String percDespAdm,
+          String percDespCom,
+          String percDespDir,
+          String percDespFin,
+          String lucro) =>
+      _lucroRealRepository.saveData(
+          id,
+          percIcms,
+          percPis,
+          percConfins,
+          percComissao,
+          percFrete,
+          percDespAdm,
+          percDespCom,
+          percDespDir,
+          percDespFin,
+          lucro);
 }
