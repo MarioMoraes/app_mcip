@@ -29,7 +29,8 @@ class _ProductsPageState extends State<ProductsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Componentes'),
+          title: const Text('Produtos'),
+          centerTitle: true,
         ),
         body: BlocBuilder<ProductsController, ProductsState>(
           bloc: widget.controller,
