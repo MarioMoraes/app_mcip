@@ -21,4 +21,15 @@ class ProductsController extends Cubit<ProductsState> {
       emit(ProductsStateError());
     }
   }
+
+  Future<void> savePrice(
+    String empresaId,
+    String tabelaId,
+    String productId,
+    String price,
+  ) async {
+    emit(ProductsStateLoading());
+    await productsService.savePrice(empresaId, tabelaId, productId, price);
+    emit(ProductsStateComplete());
+  }
 }

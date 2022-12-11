@@ -47,7 +47,10 @@ class _ProductsPageState extends State<ProductsPage> {
                 itemBuilder: ((context, index) {
                   final item = state.lr[index];
 
-                  return CardProduct(model: item);
+                  return CardProduct(
+                    model: item,
+                    controller: widget.controller,
+                  );
                 }),
               );
             }

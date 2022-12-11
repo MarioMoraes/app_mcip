@@ -36,4 +36,10 @@ class ProductsRepositoryImpl extends ProductsRepository {
     }
     return [];
   }
+
+  @override
+  Future<void> savePrice(
+      String empresaId, String tabelaId, String productId, String price) async {
+    final response = await dio.get('');
+  }
 }

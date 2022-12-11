@@ -14,6 +14,8 @@ class ProductsStateInitial extends ProductsState {}
 
 class ProductsStateLoading extends ProductsState {}
 
+class ProductsStateComplete extends ProductsState {}
+
 class ProductsStateLoaded extends ProductsState {
   List<LucroRealDetailModel> lr;
 
