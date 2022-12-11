@@ -20,8 +20,10 @@ class ProductsPage extends StatefulWidget {
 class _ProductsPageState extends State<ProductsPage> {
   @override
   void initState() {
-    widget.controller
-        .getProducts(Singleton.instance.idEmpresa, widget.model.id);
+    widget.controller.getProducts(
+      Singleton.instance.idEmpresa,
+      widget.model.id,
+    );
     super.initState();
   }
 
