@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:quickalert/quickalert.dart';
 
+import '../../../../core/widgets/custom_text_form_field.dart';
+
 class CardProduct extends StatefulWidget {
   final LucroRealDetailModel model;
   final ProductsController controller;
@@ -110,17 +112,9 @@ class _CardProductState extends State<CardProduct> {
                           type: QuickAlertType.custom,
                           confirmBtnText: 'Salvar',
                           customAsset: 'assets/images/wall.jpg',
-                          widget: TextFormField(
-                            keyboardType: const TextInputType.numberWithOptions(
-                                decimal: true, signed: true),
+                          widget: CustomTextFormField(
                             controller: _value,
-                            decoration: const InputDecoration(
-                              hintText: 'Preço Venda',
-                              prefixIcon: Icon(Icons.monetization_on),
-                            ),
-                            onChanged: (value) {
-                              _value.text = value;
-                            },
+                            label: 'Preço Venda',
                           ),
                         );
 
