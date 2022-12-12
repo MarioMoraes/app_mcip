@@ -108,13 +108,13 @@ class _CardProductState extends State<CardProduct> {
                         await QuickAlert.show(
                           context: context,
                           type: QuickAlertType.custom,
-                          barrierDismissible: true,
                           confirmBtnText: 'Salvar',
                           customAsset: 'assets/images/wall.jpg',
                           widget: TextFormField(
+                            keyboardType: const TextInputType.numberWithOptions(
+                                decimal: true, signed: true),
                             controller: _value,
                             decoration: const InputDecoration(
-                              alignLabelWithHint: true,
                               hintText: 'Preço Venda',
                               prefixIcon: Icon(Icons.monetization_on),
                             ),
