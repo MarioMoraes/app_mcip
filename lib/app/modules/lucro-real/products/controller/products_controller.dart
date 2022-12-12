@@ -31,7 +31,7 @@ class ProductsController extends Cubit<ProductsState> {
     try {
       emit(ProductsStateLoading());
       await productsService.savePrice(empresaId, tabelaId, productId, price);
-      emit(ProductsStateComplete());
+      emit(ProductsStateLoaded(lr: []));
     } on Exception {
       emit(ProductsStateError());
     }
