@@ -4,7 +4,6 @@ import 'package:app_mcip/app/modules/lucro-real/products/controller/products_sta
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:quickalert/quickalert.dart';
 
 class CardProduct extends StatefulWidget {
@@ -34,9 +33,13 @@ class _CardProductState extends State<CardProduct> {
     TextStyle stylePrice = const TextStyle(color: Color(0xFF4B1111));
 
     return BlocListener<ProductsController, ProductsState>(
+      bloc: widget.controller,
       listener: (context, state) {
         if (state is ProductsStateComplete) {
-          Modular.to.pop();
+          widget.controller.getProducts(
+            Singleton.instance.idEmpresa,
+            widget.model.fpvLucroRealId,
+          );
         }
       },
       child: Container(
@@ -74,70 +77,25 @@ class _CardProductState extends State<CardProduct> {
               const SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 50, right: 50),
-                child: Row(
-                  children: [
-                    const Text('Custo/Unidade'),
-                    const Spacer(),
-                    Text(
-                      widget.model.produtoCustoPorUnidade,
-                      style: stylePrice,
-                    )
-                  ],
-                ),
+              DetailValue(
+                title: 'Custo/Unidade',
+                value: widget.model.produtoCustoPorUnidade,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 50, right: 50),
-                child: Row(
-                  children: [
-                    const Text('Margem'),
-                    const Spacer(),
-                    Text(
-                      widget.model.margem,
-                      style: stylePrice,
-                    )
-                  ],
-                ),
+              DetailValue(
+                title: 'Margem',
+                value: widget.model.margem,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 50, right: 50),
-                child: Row(
-                  children: [
-                    const Text('Lucro Desejado'),
-                    const Spacer(),
-                    Text(
-                      widget.model.fpvLucroRealDetailPercLucroLiquido,
-                      style: stylePrice,
-                    )
-                  ],
-                ),
+              DetailValue(
+                title: 'Lucro Desejado',
+                value: widget.model.fpvLucroRealDetailPercLucroLiquido,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 50, right: 50),
-                child: Row(
-                  children: [
-                    const Text('Lucro Praticado'),
-                    const Spacer(),
-                    Text(
-                      widget.model.fpvLucroRealDetailPercentualTotal,
-                      style: stylePrice,
-                    )
-                  ],
-                ),
+              DetailValue(
+                title: 'Lucro Praticado',
+                value: widget.model.fpvLucroRealDetailPercentualTotal,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 50, right: 50),
-                child: Row(
-                  children: [
-                    const Text('Lucro Líquido'),
-                    const Spacer(),
-                    Text(
-                      widget.model.lucroLiquidoPraticado,
-                      style: stylePrice,
-                    )
-                  ],
-                ),
+              DetailValue(
+                title: 'Lucro Líquido',
+                value: widget.model.lucroLiquidoPraticado,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 50, right: 50),
@@ -158,9 +116,7 @@ class _CardProductState extends State<CardProduct> {
                             decoration: const InputDecoration(
                               alignLabelWithHint: true,
                               hintText: 'Preço Venda',
-                              prefixIcon: Icon(
-                                Icons.monetization_on,
-                              ),
+                              prefixIcon: Icon(Icons.monetization_on),
                             ),
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.number,
@@ -196,6 +152,32 @@ class _CardProductState extends State<CardProduct> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class DetailValue extends StatelessWidget {
+  final String title;
+  final String value;
+
+  const DetailValue({Key? key, required this.title, required this.value})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle stylePrice = const TextStyle(color: Color(0xFF4B1111));
+    return Padding(
+      padding: const EdgeInsets.only(left: 50, right: 50),
+      child: Row(
+        children: [
+          Text(title),
+          const Spacer(),
+          Text(
+            value,
+            style: stylePrice,
+          )
+        ],
       ),
     );
   }
