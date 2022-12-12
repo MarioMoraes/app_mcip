@@ -16,6 +16,7 @@ class ProductsServiceImpl extends ProductsService {
       _productsRepository.getProducts(empresaId, tabelaId);
 
   @override
-  Future<void> savePrice(String empresaId, String tabelaId, String productId,
-      String price) async {}
+  Future<void> savePrice(
+          String empresaId, String tabelaId, String productId, String price) =>
+      _productsRepository.savePrice(empresaId, tabelaId, productId, price);
 }

@@ -109,7 +109,7 @@ class _CardProductState extends State<CardProduct> {
                           context: context,
                           type: QuickAlertType.custom,
                           barrierDismissible: true,
-                          confirmBtnText: 'Save',
+                          confirmBtnText: 'Salvar',
                           customAsset: 'assets/images/wall.jpg',
                           widget: TextFormField(
                             controller: _value,
@@ -118,10 +118,8 @@ class _CardProductState extends State<CardProduct> {
                               hintText: 'Preço Venda',
                               prefixIcon: Icon(Icons.monetization_on),
                             ),
-                            textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.number,
                             onChanged: (value) {
-                              _value = value as MoneyMaskedTextController;
+                              _value.text = value;
                             },
                           ),
                         );
@@ -132,6 +130,12 @@ class _CardProductState extends State<CardProduct> {
                           widget.model.fpvLucroRealId,
                           widget.model.produtoId,
                           _value.text,
+                        );
+
+                        // Refresh
+                        widget.controller.getProducts(
+                          Singleton.instance.idEmpresa,
+                          widget.model.fpvLucroRealId,
                         );
                       },
                       child: Chip(

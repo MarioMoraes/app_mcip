@@ -28,8 +28,12 @@ class ProductsController extends Cubit<ProductsState> {
     String productId,
     String price,
   ) async {
-    emit(ProductsStateLoading());
-    await productsService.savePrice(empresaId, tabelaId, productId, price);
-    emit(ProductsStateComplete());
+    try {
+      emit(ProductsStateLoading());
+      await productsService.savePrice(empresaId, tabelaId, productId, price);
+      emit(ProductsStateComplete());
+    } on Exception {
+      emit(ProductsStateError());
+    }
   }
 }
