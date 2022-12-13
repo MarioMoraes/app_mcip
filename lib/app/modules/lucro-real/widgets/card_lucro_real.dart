@@ -1,23 +1,27 @@
 import 'package:app_mcip/app/core/ui/theme_extension.dart';
 import 'package:app_mcip/app/models/lucro_real_model.dart';
+import 'package:app_mcip/app/modules/lucro-real/controller/lucro_real_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/helpers/dates.dart';
+import '../../../core/helpers/singleton.dart';
 
 class CardLucroReal extends StatelessWidget {
   final LucroRealModel lucroRealModel;
+  final LucroRealController controller;
 
-  const CardLucroReal({Key? key, required this.lucroRealModel})
+  const CardLucroReal(
+      {Key? key, required this.lucroRealModel, required this.controller})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Modular.to.pushNamed(
-        '/real/detail',
-        arguments: lucroRealModel,
-      ),
+      onTap: () async {
+        await Modular.to.pushNamed('/real/detail', arguments: lucroRealModel);
+        await controller.fetchAll(Singleton.instance.idEmpresa);
+      },
       child: Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(5),

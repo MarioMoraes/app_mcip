@@ -43,7 +43,10 @@ class _LucroRealPageState extends State<LucroRealPage> {
               itemCount: state.listLR.length,
               itemBuilder: ((context, index) {
                 var model = state.listLR[index];
-                return CardLucroReal(lucroRealModel: model);
+                return CardLucroReal(
+                  lucroRealModel: model,
+                  controller: widget.lucroRealController,
+                );
               }),
             );
           }
