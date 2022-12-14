@@ -133,8 +133,9 @@ class _CardProductState extends State<CardProduct> {
                         );
                       },
                       child: Chip(
-                        label: Text(double.parse(widget.model.precoVenda)
-                            .toStringAsFixed(2)),
+                        label: Text('R\$ ' +
+                            double.parse(widget.model.precoVenda)
+                                .toStringAsFixed(2)),
                         backgroundColor:
                             const Color(0xff50587D).withOpacity(0.3),
                         avatar: const Icon(
@@ -171,10 +172,10 @@ class DetailValue extends StatelessWidget {
       padding: const EdgeInsets.only(left: 50, right: 50),
       child: Row(
         children: [
-          Text('$title %'),
+          Text(title),
           const Spacer(),
           Text(
-            double.parse(value).toStringAsFixed(2),
+            double.parse(value).toStringAsFixed(2) + '%',
             style: stylePrice,
           )
         ],
