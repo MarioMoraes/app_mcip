@@ -133,12 +133,14 @@ class _CardProductState extends State<CardProduct> {
                         );
                       },
                       child: Chip(
-                        label: Text(widget.model.precoVenda),
+                        label: Text(double.parse(widget.model.precoVenda)
+                            .toStringAsFixed(2)),
                         backgroundColor:
-                            const Color(0xff50587D).withOpacity(0.5),
+                            const Color(0xff50587D).withOpacity(0.3),
                         avatar: const Icon(
-                          Icons.edit_note,
-                          size: 18,
+                          Icons.edit_rounded,
+                          size: 16,
+                          color: Color.fromARGB(255, 128, 22, 15),
                         ),
                         shadowColor: Colors.grey,
                         labelStyle: TextStyle(color: Colors.blue.shade900),
@@ -169,10 +171,10 @@ class DetailValue extends StatelessWidget {
       padding: const EdgeInsets.only(left: 50, right: 50),
       child: Row(
         children: [
-          Text(title),
+          Text('$title %'),
           const Spacer(),
           Text(
-            value,
+            double.parse(value).toStringAsFixed(2),
             style: stylePrice,
           )
         ],
