@@ -93,11 +93,11 @@ class _CardProductState extends State<CardProduct> {
               ),
               DetailValue(
                 title: 'Lucro Praticado',
-                value: widget.model.fpvLucroRealDetailPercentualTotal,
+                value: widget.model.lucroLiquidoPraticado,
               ),
               DetailValue(
-                title: 'Lucro Líquido',
-                value: widget.model.lucroLiquidoPraticado,
+                title: 'Preço Praticado',
+                value: widget.model.precoPraticado,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 50, right: 50),

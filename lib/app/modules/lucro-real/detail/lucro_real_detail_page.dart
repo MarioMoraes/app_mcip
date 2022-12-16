@@ -79,9 +79,11 @@ class _LucroRealDetailPageState extends State<LucroRealDetailPage> {
         if (state is LucroRealStateComplete) {
           await QuickAlert.show(
               context: context,
+              text: '',
               width: 10,
               type: QuickAlertType.loading,
-              title: 'Recalculando...',
+              title: 'Recalculando Preços...',
+              titleColor: const Color.fromARGB(255, 6, 53, 92),
               animType: QuickAlertAnimType.slideInDown,
               autoCloseDuration: const Duration(seconds: 5));
           Modular.to
