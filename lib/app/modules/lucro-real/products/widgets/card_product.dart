@@ -12,8 +12,11 @@ class CardProduct extends StatefulWidget {
   final LucroRealDetailModel model;
   final ProductsController controller;
 
-  const CardProduct({Key? key, required this.model, required this.controller})
-      : super(key: key);
+  const CardProduct({
+    Key? key,
+    required this.model,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   State<CardProduct> createState() => _CardProductState();
@@ -82,28 +85,28 @@ class _CardProductState extends State<CardProduct> {
               DetailValue(
                 title: 'Custo/Unidade',
                 value: widget.model.produtoCustoPorUnidade,
-              ),
-              DetailValue(
-                title: 'Margem',
-                value: widget.model.margem,
+                show: false,
               ),
               DetailValue(
                 title: 'Lucro Desejado',
                 value: widget.model.fpvLucroRealDetailPercLucroLiquido,
+                show: true,
               ),
               DetailValue(
-                title: 'Lucro Praticado',
-                value: widget.model.lucroLiquidoPraticado,
+                title: 'Margem',
+                value: widget.model.margem,
+                show: true,
               ),
               DetailValue(
-                title: 'Preço Praticado',
+                title: 'Preço Sugerido',
                 value: widget.model.precoPraticado,
+                show: false,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 50, right: 50),
                 child: Row(
                   children: [
-                    const Text('Preço Venda'),
+                    const Text('Preço Praticado'),
                     const Spacer(),
                     InkWell(
                       onTap: () async {
@@ -134,7 +137,7 @@ class _CardProductState extends State<CardProduct> {
                       },
                       child: Chip(
                         label: Text('R\$ ' +
-                            double.parse(widget.model.precoVenda)
+                            double.parse(widget.model.precoPraticado)
                                 .toStringAsFixed(2)),
                         backgroundColor:
                             const Color(0xff50587D).withOpacity(0.3),
@@ -150,6 +153,11 @@ class _CardProductState extends State<CardProduct> {
                   ],
                 ),
               ),
+              DetailValue(
+                title: 'Lucro Praticado',
+                value: widget.model.lucroLiquidoPraticado,
+                show: true,
+              ),
             ],
           ),
         ),
@@ -161,8 +169,10 @@ class _CardProductState extends State<CardProduct> {
 class DetailValue extends StatelessWidget {
   final String title;
   final String value;
+  final bool show;
 
-  const DetailValue({Key? key, required this.title, required this.value})
+  const DetailValue(
+      {Key? key, required this.title, required this.value, required this.show})
       : super(key: key);
 
   @override
@@ -175,7 +185,9 @@ class DetailValue extends StatelessWidget {
           Text(title),
           const Spacer(),
           Text(
-            double.parse(value).toStringAsFixed(2) + '%',
+            show
+                ? double.parse(value).toStringAsFixed(2) + '%'
+                : 'R\$ ' + double.parse(value).toStringAsFixed(2),
             style: stylePrice,
           )
         ],

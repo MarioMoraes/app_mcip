@@ -52,7 +52,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
           'empresa_id': empresaId,
           'tabela_id': tabelaId,
           'produto_id': productId,
-          'preco_venda': price,
+          'preco_praticado': price,
         },
       );
     } on DioError {
