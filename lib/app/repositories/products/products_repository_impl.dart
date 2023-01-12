@@ -67,7 +67,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
       final response = await dio.get(
         'https://23.20.160.129/app/api/produtos.php',
         queryParameters: {
-          'empresa_id': empresaId,
+          'id': empresaId,
         },
       );
 

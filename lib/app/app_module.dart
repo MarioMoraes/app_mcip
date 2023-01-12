@@ -1,6 +1,7 @@
 import 'package:app_mcip/app/modules/centro-custo/centro_custo_module.dart';
 import 'package:app_mcip/app/modules/componente/componente_module.dart';
 import 'package:app_mcip/app/modules/lucro-real/lucro_real_module.dart';
+import 'package:app_mcip/app/modules/produtos/produtos_module.dart';
 import 'package:app_mcip/app/repositories/auth/auth_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -50,6 +51,11 @@ class AppModule extends Module {
         ModuleRoute(
           '/real',
           module: LucroRealModule(),
+          transition: TransitionType.rightToLeft,
+        ),
+        ModuleRoute(
+          '/produtos',
+          module: ProdutosModule(),
           transition: TransitionType.rightToLeft,
         ),
       ];
