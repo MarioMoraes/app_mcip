@@ -99,7 +99,7 @@ class _CardProductState extends State<CardProduct> {
               ),
               DetailValue(
                 title: 'Preço Sugerido',
-                value: widget.model.precoPraticado,
+                value: widget.model.precoVenda,
                 show: false,
               ),
               Padding(
