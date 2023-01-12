@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:app_mcip/app/models/lucro_real_detail_model.dart';
+import 'package:app_mcip/app/models/produto_model.dart';
 import 'package:app_mcip/app/repositories/products/products_repository.dart';
 import 'package:app_mcip/app/services/products/products_service.dart';
 
@@ -19,4 +20,8 @@ class ProductsServiceImpl extends ProductsService {
   Future<void> savePrice(
           String empresaId, String tabelaId, String productId, String price) =>
       _productsRepository.savePrice(empresaId, tabelaId, productId, price);
+
+  @override
+  Future<List<ProdutoModel>> getProdutos(String empresaId) async =>
+      _productsRepository.getProdutos(empresaId);
 }

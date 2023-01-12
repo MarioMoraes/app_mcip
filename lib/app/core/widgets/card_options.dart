@@ -49,7 +49,7 @@ class CardOptions extends StatelessWidget {
             ),
             Text(
               title,
-              style: const TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 11),
             ),
           ],
         ),

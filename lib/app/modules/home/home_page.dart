@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 50,
+            top: 40,
             left: _sizeWidth * .1,
             right: 20,
             child: Wrap(
@@ -51,6 +51,16 @@ class HomePage extends StatelessWidget {
                 CardOptions(
                   title: 'Centro de Custo',
                   icon: Icons.assessment,
+                  function: () => Modular.to.pushNamed('/custo'),
+                ),
+                CardOptions(
+                  title: 'Produtos',
+                  icon: Icons.precision_manufacturing,
+                  function: () => Modular.to.pushNamed('/produtos'),
+                ),
+                CardOptions(
+                  title: 'Simples Nacional',
+                  icon: Icons.format_align_center,
                   function: () => Modular.to.pushNamed('/custo'),
                 ),
                 CardOptions(
